@@ -1,0 +1,1 @@
+# Lehet nem jó seq diagram van egy draw.io-s fájlban.
