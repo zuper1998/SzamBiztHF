@@ -67,7 +67,7 @@ jobs:
     #    uses a compiled language
 
     - run: |
-       make bootstrap
+       cd CAFFparser
        make release
 
     - name: Perform CodeQL Analysis
