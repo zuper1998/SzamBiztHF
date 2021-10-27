@@ -21,11 +21,11 @@ public:
     std::vector<RGBpixel> pixels; //Note: Jobbrol Balra; Fentrol Lefele
 
     CIFF(int _w,int _h, std::string _caption, std::vector<std::string> _tag, std::vector<RGBpixel> px);
-    CIFF(CIFF const &ciff)=delete;
+    CIFF(CIFF const &ciff);
     CIFF()=default;
     void printRGB();
     ~CIFF()=default;
-    CIFF& operator=(CIFF other)=delete;
+    CIFF& operator=(const CIFF& other)=default;
 };
 
 

@@ -8,9 +8,10 @@
 
 #include "Block.h"
 
-class CaffHeader : Block {
+class CaffHeader : public Block {
 public:
     int num_anim;
+    CaffHeader(int id,int num_anim): Block(id),num_anim(num_anim){}
 };
 
 

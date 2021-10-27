@@ -9,11 +9,13 @@
 #include "../CIFF.h"
 #include "Block.h"
 
-class CaffAnim : Block {
+class CaffAnim : public Block {
 public:
     int duration;
     CIFF ciff;
-    CaffAnim(int id, int duration,CIFF _ciff);
+    CaffAnim(int id, int duration,CIFF const &_ciff): Block(id),duration(duration),ciff(_ciff){
+
+    }
 };
 
 

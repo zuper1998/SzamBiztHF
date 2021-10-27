@@ -21,3 +21,5 @@ void CIFF::printRGB() {
         }
     }
 }
+
+CIFF::CIFF(const CIFF &ciff) = default;

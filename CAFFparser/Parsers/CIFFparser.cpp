@@ -9,16 +9,8 @@
 #include <vector>
 #include <stdexcept>
 
-CIFF CIFFparser::parser(const std::string& filename) {
+CIFF CIFFparser::parser(std::fstream file) {
 
-    if (std::fstream file(filename, std::ios::in | std::ios::out | std::ios::binary);file) {
-
-        file.seekg(0,std::fstream::end);
-        long len = file.tellg();
-        file.seekg(0,std::fstream::beg);
-        if(len < 32){
-            throw std::invalid_argument( "File too short");
-        }
         std::string magic;
         //Magic
         file.read((char*)&magic, 4);
@@ -27,14 +19,11 @@ CIFF CIFFparser::parser(const std::string& filename) {
             throw std::invalid_argument( "File wrong format");
         }
         //Header size
-        size_t fileSize;
-        file.read((char *) & fileSize,8);
-        if(len<fileSize){
-            throw std::invalid_argument(  "File wrong format");
-        }
+        size_t headerSize;
+        file.read((char *) & headerSize, 8);
         //content size
         size_t contentSize=0;
-        file.read((char*)&fileSize,8);
+        file.read((char*)&contentSize,8);
 
         //Width
         size_t width=0;
@@ -71,7 +60,7 @@ CIFF CIFFparser::parser(const std::string& filename) {
                 curtTag.push_back(curt);
             }
 
-        }while((tags.size()+caption.length()+4+4*8+contentSize)!=len);
+        }while((tags.size()+caption.length()+4+4*8)<=headerSize);
 
         //Ciff content
         char r=0;
@@ -84,16 +73,11 @@ CIFF CIFFparser::parser(const std::string& filename) {
             file.read(&b,4);
             px.emplace_back(r,g,b);
 
-        }while(px.size()<contentSize);
+        }while(px.size()<=contentSize);
 
 
 
 
 
         return {(int)width,(int)height,caption,tags,px};
-
-
-
-    }
-    return {};
 }
