@@ -8,15 +8,15 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/CiffCaffStuff/CAFF/Block.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/CAFF/Block.cpp.o"
-  "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/CiffCaffStuff/CAFF/CAFF.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/CAFF/CAFF.cpp.o"
-  "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/CiffCaffStuff/CAFF/CaffAnim.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/CAFF/CaffAnim.cpp.o"
-  "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/CiffCaffStuff/CAFF/CaffCredits.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/CAFF/CaffCredits.cpp.o"
-  "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/CiffCaffStuff/CAFF/CaffHeader.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/CAFF/CaffHeader.cpp.o"
-  "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/CiffCaffStuff/CIFF.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/CIFF.cpp.o"
-  "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/CiffCaffStuff/RGBpixel.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/RGBpixel.cpp.o"
-  "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/Parsers/CIFFparser.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/Parsers/CIFFparser.cpp.o"
-  "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/main.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/main.cpp.o"
+  "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/CAFF/Block.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/CAFF/Block.cpp.o"
+  "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/CAFF/CAFF.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/CAFF/CAFF.cpp.o"
+  "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/CAFF/CaffAnim.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/CAFF/CaffAnim.cpp.o"
+  "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/CAFF/CaffCredits.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/CAFF/CaffCredits.cpp.o"
+  "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/CAFF/CaffHeader.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/CAFF/CaffHeader.cpp.o"
+  "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/CIFF.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/CIFF.cpp.o"
+  "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/RGBpixel.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/RGBpixel.cpp.o"
+  "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/Parsers/CIFFparser.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/Parsers/CIFFparser.cpp.o"
+  "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/main.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

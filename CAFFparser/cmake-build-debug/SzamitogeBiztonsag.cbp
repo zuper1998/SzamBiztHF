@@ -8,38 +8,38 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug"/>
+				<Option working_dir="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug"/>
+				<Option working_dir="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug"/>
+				<Option working_dir="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="SzamitogeBiztonsag">
-				<Option output="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/SzamitogeBiztonsag" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug"/>
+				<Option output="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/SzamitogeBiztonsag" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -53,15 +53,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/Makefile&quot;  VERBOSE=1 SzamitogeBiztonsag"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/Makefile&quot;  VERBOSE=1 SzamitogeBiztonsag"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="SzamitogeBiztonsag/fast">
-				<Option output="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/SzamitogeBiztonsag" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug"/>
+				<Option output="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/SzamitogeBiztonsag" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -75,65 +75,65 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/Makefile&quot;  VERBOSE=1 SzamitogeBiztonsag/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/Makefile&quot;  VERBOSE=1 SzamitogeBiztonsag/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/CiffCaffStuff/CAFF/Block.cpp">
+		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/CAFF/Block.cpp">
 			<Option target="SzamitogeBiztonsag"/>
 		</Unit>
-		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/CiffCaffStuff/CAFF/Block.h">
+		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/CAFF/Block.h">
 			<Option target="SzamitogeBiztonsag"/>
 		</Unit>
-		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/CiffCaffStuff/CAFF/CAFF.cpp">
+		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/CAFF/CAFF.cpp">
 			<Option target="SzamitogeBiztonsag"/>
 		</Unit>
-		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/CiffCaffStuff/CAFF/CAFF.h">
+		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/CAFF/CAFF.h">
 			<Option target="SzamitogeBiztonsag"/>
 		</Unit>
-		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/CiffCaffStuff/CAFF/CaffAnim.cpp">
+		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/CAFF/CaffAnim.cpp">
 			<Option target="SzamitogeBiztonsag"/>
 		</Unit>
-		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/CiffCaffStuff/CAFF/CaffAnim.h">
+		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/CAFF/CaffAnim.h">
 			<Option target="SzamitogeBiztonsag"/>
 		</Unit>
-		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/CiffCaffStuff/CAFF/CaffCredits.cpp">
+		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/CAFF/CaffCredits.cpp">
 			<Option target="SzamitogeBiztonsag"/>
 		</Unit>
-		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/CiffCaffStuff/CAFF/CaffCredits.h">
+		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/CAFF/CaffCredits.h">
 			<Option target="SzamitogeBiztonsag"/>
 		</Unit>
-		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/CiffCaffStuff/CAFF/CaffHeader.cpp">
+		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/CAFF/CaffHeader.cpp">
 			<Option target="SzamitogeBiztonsag"/>
 		</Unit>
-		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/CiffCaffStuff/CAFF/CaffHeader.h">
+		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/CAFF/CaffHeader.h">
 			<Option target="SzamitogeBiztonsag"/>
 		</Unit>
-		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/CiffCaffStuff/CIFF.cpp">
+		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/CIFF.cpp">
 			<Option target="SzamitogeBiztonsag"/>
 		</Unit>
-		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/CiffCaffStuff/CIFF.h">
+		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/CIFF.h">
 			<Option target="SzamitogeBiztonsag"/>
 		</Unit>
-		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/CiffCaffStuff/RGBpixel.cpp">
+		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/RGBpixel.cpp">
 			<Option target="SzamitogeBiztonsag"/>
 		</Unit>
-		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/CiffCaffStuff/RGBpixel.h">
+		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/RGBpixel.h">
 			<Option target="SzamitogeBiztonsag"/>
 		</Unit>
-		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/Parsers/CIFFparser.cpp">
+		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/Parsers/CIFFparser.cpp">
 			<Option target="SzamitogeBiztonsag"/>
 		</Unit>
-		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/Parsers/CIFFparser.h">
+		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/Parsers/CIFFparser.h">
 			<Option target="SzamitogeBiztonsag"/>
 		</Unit>
-		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/main.cpp">
+		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/main.cpp">
 			<Option target="SzamitogeBiztonsag"/>
 		</Unit>
-		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamitogeBiztonsag/CMakeLists.txt">
+		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

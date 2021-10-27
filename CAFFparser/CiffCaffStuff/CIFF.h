@@ -20,6 +20,7 @@ public:
     std::vector<RGBpixel> pixels; //Note: Jobbrol Balra; Fentrol Lefele
 
     CIFF(int _w,int _h, std::string _caption, std::vector<std::string> _tag, std::vector<RGBpixel> px);
+    CIFF(CIFF const &ciff);
 
     void printRGB();
 };

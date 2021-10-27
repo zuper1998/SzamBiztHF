@@ -21,3 +21,7 @@ void CIFF::printRGB() {
         }
     }
 }
+
+CIFF::CIFF(CIFF const &ciff) {
+
+}
