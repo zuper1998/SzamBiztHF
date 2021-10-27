@@ -8,14 +8,15 @@
 #include "CIFFparser.h"
 #include <vector>
 #include <stdexcept>
+#include <memory>
 
-CIFF CIFFparser::parser(std::fstream file) {
+CIFF CIFFparser::parser(std::fstream& file) {
 
-        std::string magic;
+        auto magic = std::make_unique<char[]>(5);
         //Magic
-        file.read((char*)&magic, 4);
-
-        if(std::string("CIFF")!=magic){
+        file.read(magic.get(), 5);
+        magic.get()[4]='\0';
+        if(std::string("CIFF")!=magic.get()){
             throw std::invalid_argument( "File wrong format");
         }
         //Header size
@@ -51,6 +52,7 @@ CIFF CIFFparser::parser(std::fstream file) {
         std::vector<std::string> tags;
         std::string curtTag;
         char curt=0;
+        int bytes_read=0;
         do{
             file.read(&curt,1);
             if(curt=='\0'){
@@ -60,7 +62,7 @@ CIFF CIFFparser::parser(std::fstream file) {
                 curtTag.push_back(curt);
             }
 
-        }while((tags.size()+caption.length()+4+4*8)<=headerSize);
+        }while((bytes_read+++caption.length()+4+4*8)<=headerSize);
 
         //Ciff content
         char r=0;

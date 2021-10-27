@@ -7,6 +7,7 @@
 
 
 #include <vector>
+#include <iostream>
 #include "Block.h"
 #include "CaffHeader.h"
 #include "CaffCredits.h"
@@ -19,6 +20,12 @@ public:
     void addHeader (const CaffHeader& caffHeader) {blocks.push_back(caffHeader);}
     void addCredits(const CaffCredits& caffCredits){blocks.push_back(caffCredits);}
     void addAnim(const CaffAnim& caffAnim){blocks.push_back(caffAnim);}
+
+    void print() {
+        for(auto b : blocks){
+            std::cout<<b.ID;
+        }
+    }
 };
 
 

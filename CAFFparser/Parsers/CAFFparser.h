@@ -10,7 +10,8 @@
 #include "../CiffCaffStuff/CAFF/CAFF.h"
 
 class CAFFparser {
-    [[nodiscard]] CAFF parser(const std::string &filename) const;
+public:
+    [[nodiscard]] static CAFF parser(const std::string &filename);
 };
 
 

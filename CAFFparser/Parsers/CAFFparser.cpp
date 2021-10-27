@@ -8,7 +8,7 @@
 #include "../CiffCaffStuff/CAFF/CAFF.h"
 #include "CIFFparser.h"
 
-CAFF CAFFparser::parser(const std::string &filename) const {
+CAFF CAFFparser::parser(const std::string &filename) {
     CAFF main;
 
     if (std::fstream file(filename, std::ios::in | std::ios::out | std::ios::binary);file) {
@@ -22,21 +22,24 @@ CAFF CAFFparser::parser(const std::string &filename) const {
             //length --- DATA LENGTH not TOTAL LENGTH
             size_t len;
             file.read((char *) &len, 8);
-            std::string magic;
+            auto magic = std::make_unique<char[]>(5);
             //credit
-            auto creator = std::make_unique<char[]>(8);
+
             size_t year;
             size_t month;
             size_t day;
             size_t hour;
             size_t minute;
+            size_t creator_len;
+            auto creator = std::unique_ptr<char[]>();
             //Anim
             size_t duration;
             switch (ID) {
                 case 1: //Header
-                    file.read((char *) &magic, 4);
-                    if (std::string("CAFF") != magic) {
-                        throw std::invalid_argument("File wrong format");
+                    file.read(magic.get(), 4);
+                    magic.get()[4]='\0';
+                    if (std::string("CAFF") != magic.get()) {
+                        throw std::invalid_argument("File wrong format expected CAFF");
                     }
                     //Header Size
                     size_t hSize;
@@ -56,8 +59,13 @@ CAFF CAFFparser::parser(const std::string &filename) const {
                     file.read((char *) &hour, 1);
                     file.read((char *) &minute, 1);
 
+                    file.read((char *) &creator_len, 8);
+                    if ((len + 9 + 14) < creator_len) {
+                        throw std::invalid_argument("creator len to big");
+                    }
+                    creator = std::make_unique<char[]>((int) creator_len);
+                    file.read(creator.get(), (int) creator_len);
 
-                    file.read(creator.get(), 8);
 
                     main.addCredits(CaffCredits(ID, (int) year, (int) month, (int) day, (int) hour, (int) minute,
                                                 std::string(creator.get())));
@@ -65,13 +73,13 @@ CAFF CAFFparser::parser(const std::string &filename) const {
                     break;
                 case 3: //Anim
                     file.read((char *) &duration, 8);
-                    main.addAnim(CaffAnim(ID, duration, CIFFparser::parser(file)));
+                    main.addAnim(CaffAnim(ID, (int) duration, CIFFparser::parser(file)));
 
                     break;
                 default:
                     throw std::invalid_argument("Unrecognized CAFF ID");
             }
-        }while(file.eof());
+        } while (!file.eof());
     }
     return main;
 }

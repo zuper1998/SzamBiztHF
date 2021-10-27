@@ -8,8 +8,11 @@ CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/CAFF/CAFF.cpp.o: \
  ../CiffCaffStuff/CAFF/Block.h \
  ../CiffCaffStuff/CAFF/CAFF.cpp \
  ../CiffCaffStuff/CAFF/CAFF.h \
+ ../CiffCaffStuff/CAFF/CaffAnim.h \
  ../CiffCaffStuff/CAFF/CaffCredits.h \
- ../CiffCaffStuff/CAFF/CaffHeader.h
+ ../CiffCaffStuff/CAFF/CaffHeader.h \
+ ../CiffCaffStuff/CIFF.h \
+ ../CiffCaffStuff/RGBpixel.h
 CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/CAFF/CaffAnim.cpp.o: \
  ../CiffCaffStuff/CAFF/Block.h \
  ../CiffCaffStuff/CAFF/CaffAnim.cpp \
@@ -34,14 +37,26 @@ CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/RGBpixel.cpp.o: \
 CMakeFiles/SzamitogeBiztonsag.dir/Parsers/CAFFparser.cpp.o: \
  ../CiffCaffStuff/CAFF/Block.h \
  ../CiffCaffStuff/CAFF/CAFF.h \
+ ../CiffCaffStuff/CAFF/CaffAnim.h \
  ../CiffCaffStuff/CAFF/CaffCredits.h \
  ../CiffCaffStuff/CAFF/CaffHeader.h \
+ ../CiffCaffStuff/CIFF.h \
+ ../CiffCaffStuff/RGBpixel.h \
  ../Parsers/CAFFparser.cpp \
- ../Parsers/CAFFparser.h
+ ../Parsers/CAFFparser.h \
+ ../Parsers/CIFFparser.h
 CMakeFiles/SzamitogeBiztonsag.dir/Parsers/CIFFparser.cpp.o: \
  ../CiffCaffStuff/CIFF.h \
  ../CiffCaffStuff/RGBpixel.h \
  ../Parsers/CIFFparser.cpp \
  ../Parsers/CIFFparser.h
 CMakeFiles/SzamitogeBiztonsag.dir/main.cpp.o: \
+ ../CiffCaffStuff/CAFF/Block.h \
+ ../CiffCaffStuff/CAFF/CAFF.h \
+ ../CiffCaffStuff/CAFF/CaffAnim.h \
+ ../CiffCaffStuff/CAFF/CaffCredits.h \
+ ../CiffCaffStuff/CAFF/CaffHeader.h \
+ ../CiffCaffStuff/CIFF.h \
+ ../CiffCaffStuff/RGBpixel.h \
+ ../Parsers/CAFFparser.h \
  ../main.cpp
