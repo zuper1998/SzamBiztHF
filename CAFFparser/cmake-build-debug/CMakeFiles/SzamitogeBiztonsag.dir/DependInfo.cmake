@@ -15,6 +15,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/CAFF/CaffHeader.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/CAFF/CaffHeader.cpp.o"
   "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/CIFF.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/CIFF.cpp.o"
   "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/RGBpixel.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/RGBpixel.cpp.o"
+  "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/Parsers/CAFFparser.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/Parsers/CAFFparser.cpp.o"
   "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/Parsers/CIFFparser.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/Parsers/CIFFparser.cpp.o"
   "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/main.cpp" "/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir/main.cpp.o"
   )

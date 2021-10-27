@@ -297,6 +297,30 @@ CiffCaffStuff/RGBpixel.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SzamitogeBiztonsag.dir/build.make CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/RGBpixel.cpp.s
 .PHONY : CiffCaffStuff/RGBpixel.cpp.s
 
+Parsers/CAFFparser.o: Parsers/CAFFparser.cpp.o
+.PHONY : Parsers/CAFFparser.o
+
+# target to build an object file
+Parsers/CAFFparser.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SzamitogeBiztonsag.dir/build.make CMakeFiles/SzamitogeBiztonsag.dir/Parsers/CAFFparser.cpp.o
+.PHONY : Parsers/CAFFparser.cpp.o
+
+Parsers/CAFFparser.i: Parsers/CAFFparser.cpp.i
+.PHONY : Parsers/CAFFparser.i
+
+# target to preprocess a source file
+Parsers/CAFFparser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SzamitogeBiztonsag.dir/build.make CMakeFiles/SzamitogeBiztonsag.dir/Parsers/CAFFparser.cpp.i
+.PHONY : Parsers/CAFFparser.cpp.i
+
+Parsers/CAFFparser.s: Parsers/CAFFparser.cpp.s
+.PHONY : Parsers/CAFFparser.s
+
+# target to generate assembly for a file
+Parsers/CAFFparser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SzamitogeBiztonsag.dir/build.make CMakeFiles/SzamitogeBiztonsag.dir/Parsers/CAFFparser.cpp.s
+.PHONY : Parsers/CAFFparser.cpp.s
+
 Parsers/CIFFparser.o: Parsers/CIFFparser.cpp.o
 .PHONY : Parsers/CIFFparser.o
 
@@ -375,6 +399,9 @@ help:
 	@echo "... CiffCaffStuff/RGBpixel.o"
 	@echo "... CiffCaffStuff/RGBpixel.i"
 	@echo "... CiffCaffStuff/RGBpixel.s"
+	@echo "... Parsers/CAFFparser.o"
+	@echo "... Parsers/CAFFparser.i"
+	@echo "... Parsers/CAFFparser.s"
 	@echo "... Parsers/CIFFparser.o"
 	@echo "... Parsers/CIFFparser.i"
 	@echo "... Parsers/CIFFparser.s"

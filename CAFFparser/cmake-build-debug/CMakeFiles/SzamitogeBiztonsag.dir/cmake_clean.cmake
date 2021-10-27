@@ -6,6 +6,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/CAFF/CaffHeader.cpp.o"
   "CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/CIFF.cpp.o"
   "CMakeFiles/SzamitogeBiztonsag.dir/CiffCaffStuff/RGBpixel.cpp.o"
+  "CMakeFiles/SzamitogeBiztonsag.dir/Parsers/CAFFparser.cpp.o"
   "CMakeFiles/SzamitogeBiztonsag.dir/Parsers/CIFFparser.cpp.o"
   "CMakeFiles/SzamitogeBiztonsag.dir/main.cpp.o"
   "SzamitogeBiztonsag"

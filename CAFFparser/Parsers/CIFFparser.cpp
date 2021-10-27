@@ -6,32 +6,31 @@
 #include <fstream>
 #include <string>
 #include "CIFFparser.h"
-#include <memory>
-
+#include <vector>
+#include <stdexcept>
 
 CIFF CIFFparser::parser(const std::string& filename) {
-    std::fstream file(filename, std::ios::in | std::ios::out | std::ios::binary);
 
-    if (file) {
+    if (std::fstream file(filename, std::ios::in | std::ios::out | std::ios::binary);file) {
 
         file.seekg(0,std::fstream::end);
         long len = file.tellg();
         file.seekg(0,std::fstream::beg);
         if(len < 32){
-            throw "File too short"; //TODO: error for this
+            throw std::invalid_argument( "File too short");
         }
         std::string magic;
         //Magic
         file.read((char*)&magic, 4);
 
         if(std::string("CIFF")!=magic){
-            throw "File wrong format"; //TODO: error for this, also errorokat a vegere kene rakni
+            throw std::invalid_argument( "File wrong format");
         }
         //Header size
         size_t fileSize;
         file.read((char *) & fileSize,8);
         if(len<fileSize){
-            throw "File wrong format";
+            throw std::invalid_argument(  "File wrong format");
         }
         //content size
         size_t contentSize=0;
@@ -46,7 +45,7 @@ CIFF CIFFparser::parser(const std::string& filename) {
         size_t height=0;
         file.read((char*)&height,8);
         if(contentSize!=width*height*3){
-            throw "Nem megfelelo hossz";
+            throw std::invalid_argument("Nem megfelelo hossz");
         }
 
         //Caption :/
@@ -61,10 +60,17 @@ CIFF CIFFparser::parser(const std::string& filename) {
 
         //Tags
         std::vector<std::string> tags;
-        std::string cutTag;
+        std::string curtTag;
         char curt=0;
         do{
-            file.read(&curt,1)
+            file.read(&curt,1);
+            if(curt=='\0'){
+                tags.push_back(curtTag);
+                curtTag="";
+            }else{
+                curtTag.push_back(curt);
+            }
+
         }while((tags.size()+caption.length()+4+4*8+contentSize)!=len);
 
         //Ciff content
@@ -84,12 +90,10 @@ CIFF CIFFparser::parser(const std::string& filename) {
 
 
 
-
+        return {(int)width,(int)height,caption,tags,px};
 
 
 
     }
-
-
-    return;
+    return {};
 }

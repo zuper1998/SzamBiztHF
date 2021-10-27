@@ -124,6 +124,12 @@
 		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/CiffCaffStuff/RGBpixel.h">
 			<Option target="SzamitogeBiztonsag"/>
 		</Unit>
+		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/Parsers/CAFFparser.cpp">
+			<Option target="SzamitogeBiztonsag"/>
+		</Unit>
+		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/Parsers/CAFFparser.h">
+			<Option target="SzamitogeBiztonsag"/>
+		</Unit>
 		<Unit filename="/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/Parsers/CIFFparser.cpp">
 			<Option target="SzamitogeBiztonsag"/>
 		</Unit>
