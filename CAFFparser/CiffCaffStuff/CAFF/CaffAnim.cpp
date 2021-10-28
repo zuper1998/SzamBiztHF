@@ -1,7 +1,7 @@
 //
 // Created by narcano on 2021. 09. 29..
 //
-#include <SFML/Graphics.hpp>
+
 #include <iostream>
 #include <cstdint>
 #include <cstring>
@@ -9,6 +9,7 @@
 
 void CaffAnim::Visual(int counter) {
     //THIS SHOULD NEVER! SEE THE LIVE CODE only for testing
+    /*
     int h = ciff.width;
     int w = ciff.height;
     FILE *f;
@@ -61,5 +62,5 @@ void CaffAnim::Visual(int counter) {
     }
 
     free(img);
-    fclose(f);
+    fclose(f);*/
 }
