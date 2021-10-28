@@ -9,7 +9,7 @@
 class Block {
 public:
     int ID;
-    Block(int _id): ID(_id){
+    explicit Block(int _id): ID(_id){
 
     }
 };
