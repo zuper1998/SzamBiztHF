@@ -72,6 +72,10 @@ CAFF CAFFparser::parser(const std::string &filename) {
 
                     break;
                 case 3: //Anim
+                    if(main.toManyAnim()){//not gonna read ahead if there is nothing there :D
+                        file.close();
+                        return main;
+                    }
                     file.read((char *) &duration, 8);
                     main.addAnim(CaffAnim(ID, (int) duration, CIFFparser::parser(file)));
 

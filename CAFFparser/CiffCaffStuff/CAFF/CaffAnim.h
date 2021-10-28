@@ -16,6 +16,7 @@ public:
     CaffAnim(int id, int duration,CIFF const &_ciff): Block(id),duration(duration),ciff(_ciff){
 
     }
+    void Visual(int);
 };
 
 

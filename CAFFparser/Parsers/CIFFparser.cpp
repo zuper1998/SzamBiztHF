@@ -14,7 +14,7 @@ CIFF CIFFparser::parser(std::fstream& file) {
 
         auto magic = std::make_unique<char[]>(5);
         //Magic
-        file.read(magic.get(), 5);
+        file.read(magic.get(), 4);
         magic.get()[4]='\0';
         if(std::string("CIFF")!=magic.get()){
             throw std::invalid_argument( "File wrong format");
@@ -62,7 +62,7 @@ CIFF CIFFparser::parser(std::fstream& file) {
                 curtTag.push_back(curt);
             }
 
-        }while((bytes_read+++caption.length()+4+4*8)<=headerSize);
+        }while((++bytes_read+caption.size()+2*8+2*8+4+1)<=headerSize);
 
         //Ciff content
         char r=0;
@@ -70,12 +70,12 @@ CIFF CIFFparser::parser(std::fstream& file) {
         char b=0;
         std::vector<RGBpixel> px;
         do{
-            file.read(&r,4);
-            file.read(&g,4);
-            file.read(&b,4);
+            file.read(&r,1);
+            file.read(&g,1);
+            file.read(&b,1);
             px.emplace_back(r,g,b);
 
-        }while(px.size()<=contentSize);
+        }while((px.size()*3+3)<=contentSize);
 
 
 

@@ -15,16 +15,28 @@
 
 class CAFF {
 public:
-    std::vector<Block> blocks = std::vector<Block>();
+    CaffHeader ch=CaffHeader(0,0);
+    CaffCredits cc=CaffCredits(0,0,0,0,0,0,"");
+
+    std::vector<CaffAnim> blocks = std::vector<CaffAnim>();
     CAFF()=default;
-    void addHeader (const CaffHeader& caffHeader) {blocks.push_back(caffHeader);}
-    void addCredits(const CaffCredits& caffCredits){blocks.push_back(caffCredits);}
+    void addHeader (const CaffHeader& caffHeader) {ch = caffHeader;}
+    void addCredits(const CaffCredits& caffCredits){cc = caffCredits;}
     void addAnim(const CaffAnim& caffAnim){blocks.push_back(caffAnim);}
 
     void print() {
+        std::cout << ch.num_anim <<std::endl;
+        std::cout << cc.creator<<std::endl;
+
+        int cnt=0;
         for(auto b : blocks){
-            std::cout<<b.ID;
+            std::cout<<b.ciff.caption;
+            b.Visual(cnt++);
         }
+    }
+
+    bool toManyAnim() {
+        return blocks.size()==ch.num_anim;
     }
 };
 
