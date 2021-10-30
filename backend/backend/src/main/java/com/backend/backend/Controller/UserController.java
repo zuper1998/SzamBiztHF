@@ -1,13 +1,16 @@
 package com.backend.backend.Controller;
 
-import com.backend.backend.Data.Role;
-import com.backend.backend.Data.RoleEnum;
-import com.backend.backend.Data.User;
+import com.backend.backend.Communication.Request.LoginRequest;
+import com.backend.backend.Communication.Request.UpdateUserRequest;
+import com.backend.backend.Communication.Response.LoginResponse;
+import com.backend.backend.Communication.Request.SignUpRequest;
+import com.backend.backend.Data.*;
+import com.backend.backend.Repository.LogRepository;
 import com.backend.backend.Repository.RoleRepository;
 import com.backend.backend.Repository.UserRepository;
 import com.backend.backend.Security.Auth.JwtUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.backend.backend.Security.DataAccess.DataAccessAuth;
+import com.backend.backend.Security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,8 +22,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Optional;
-import java.util.Set;
+import javax.validation.constraints.NotNull;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/user")
@@ -30,46 +33,90 @@ public class UserController {
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
+    private LogRepository logRepository;
+    @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
     private JwtUtils jwtUtils;
     @Autowired
     private PasswordEncoder encoder;
-
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-
+    @Autowired
+    private DataAccessAuth dataAccessAuth;
 
     @PostMapping("/registration")
-    public ResponseEntity<String> registration(@Valid @RequestBody User user) {
-
-        User NewUser = new User(user.getUsername(), user.getEmail(), encoder.encode(user.getPassword()));
+    public ResponseEntity<Void> registration(@Valid @RequestBody @NotNull SignUpRequest signUpMessage) {
+        if (ur.existsByUsername(signUpMessage.getUsername())) return ResponseEntity.badRequest().build();
+        User NewUser = new User(signUpMessage.getUsername(), signUpMessage.getEmail(), encoder.encode(signUpMessage.getPassword()), new ArrayList<>(), new ArrayList<>());
         Role userRole = roleRepository.findByName(RoleEnum.ROLE_USER);
         NewUser.setRoles(Set.of(userRole));
-
         ur.save(NewUser);
-        logger.info("new user successfully added to the database with the name of "+NewUser.getUsername() + " at " + java.time.LocalDateTime.now());
-        return ResponseEntity.ok("Success");
+        logRepository.save(new Log("Registration for user: " + NewUser.getUsername(), java.time.LocalDateTime.now()));
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@Valid @RequestBody User user) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody @NotNull LoginRequest loginRequest) {
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
-        logger.info("successful login for "+user.getUsername() + " at " + java.time.LocalDateTime.now());
-        return ResponseEntity.ok(jwt);
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        logRepository.save(new Log("Login for user: " + loginRequest.getUsername(), java.time.LocalDateTime.now()));
+        return ResponseEntity.ok(new LoginResponse(userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), jwt));
     }
 
-    @GetMapping("/UserInfo/{id}")
+    @PutMapping("/userUpdate/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_USER')")
-    public ResponseEntity<User> GetUser(@PathVariable long id) {
-        Optional<User> tmp = ur.findById(id);
-        if (!tmp.isPresent()) {
-            logger.error("there is no such user in database");
-            return ResponseEntity.notFound().build();
-        } else {
-            logger.info(tmp.get().getUsername() + " Successful UserInfo Get at " + java.time.LocalDateTime.now());
-            return ResponseEntity.ok(tmp.get());
-        }
+    public ResponseEntity<String> userUpdateUser(@Valid @RequestBody @NotNull UpdateUserRequest updateRequest, @PathVariable UUID id) {
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!dataAccessAuth.UserDataAccess(id, userDetails)) return ResponseEntity.badRequest().build();
+        Optional<User> user = ur.findById(id);
+        if (user.isEmpty()) return ResponseEntity.badRequest().build();
+        user.get().setEmail(updateRequest.getEmail());
+        user.get().setPassword(encoder.encode(updateRequest.getPassword()));
+        ur.save(user.get());
+        logRepository.save(new Log("User data Update for: " + user.get().getUsername() + " by user: " + userDetails.getUsername(), java.time.LocalDateTime.now()));
+        return ResponseEntity.ok(user.get().getEmail());
     }
+
+    @PostMapping("/adminAddUser")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Void> adminAddUser(@Valid @RequestBody @NotNull SignUpRequest signUpMessage) {
+        if (ur.existsByUsername(signUpMessage.getUsername())) return ResponseEntity.badRequest().build();
+        User newUser = new User(signUpMessage.getUsername(), signUpMessage.getEmail(), encoder.encode(signUpMessage.getPassword()), new ArrayList<>(), new ArrayList<>());
+        Set<Role> roleSet = new HashSet<>();
+        if(signUpMessage.getRoles() != null) {
+            if (!signUpMessage.getRoles().isEmpty()) {
+                for (String roles : signUpMessage.getRoles()) {
+                    Role role;
+                    switch (roles) {
+                        case "ROLE_ADMIN":
+                            role = roleRepository.findByName(RoleEnum.ROLE_ADMIN);
+                            logRepository.save(new Log("Registration for admin: " + newUser.getUsername() + " by admin" + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername(), java.time.LocalDateTime.now()));
+                            break;
+                        default:
+                            role = roleRepository.findByName(RoleEnum.ROLE_USER);
+                            logRepository.save(new Log("Registration for user: " + newUser.getUsername() + " by admin" + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername(), java.time.LocalDateTime.now()));
+                            break;
+                    }
+                    roleSet.add(role);
+                    newUser.getRoles().add(role);
+                }
+            }
+        }
+        Role userRole = roleRepository.findByName(RoleEnum.ROLE_USER);
+        newUser.setRoles(Set.of(userRole));
+        ur.save(newUser);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Void> deleteUser(@PathVariable UUID id) {
+        Optional<User> user = ur.findById(id);
+        if(user.isEmpty()) return ResponseEntity.badRequest().build();
+        ur.delete(user.get());
+        logRepository.save(new Log("Deleted user with id: " + id + " by admin: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername(), java.time.LocalDateTime.now()));
+        return ResponseEntity.ok().build();
+    }
+
 }

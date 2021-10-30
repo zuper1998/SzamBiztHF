@@ -1,12 +1,13 @@
 package com.backend.backend.Data;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    private UUID id;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
@@ -20,11 +21,11 @@ public class Role {
         this.name = name;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
