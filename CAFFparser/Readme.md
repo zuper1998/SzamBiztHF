@@ -2,7 +2,7 @@
 # CAFF parser
 
 
-building CAFFparser locally
+Building CAFFparser locally
 
 ### Install cmake 
 
