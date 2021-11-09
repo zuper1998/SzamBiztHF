@@ -9,6 +9,6 @@ building CAFFparser locally
 ```
 cmake .
 make 
-
+./SzamitogeBiztonsag
 ```
 
