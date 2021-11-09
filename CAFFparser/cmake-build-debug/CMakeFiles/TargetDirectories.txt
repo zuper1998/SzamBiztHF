@@ -1,3 +1,0 @@
-/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/narcano/MEGAsync/Info_MSc/Felev_2/SzamBiztHF/CAFFparser/cmake-build-debug/CMakeFiles/SzamitogeBiztonsag.dir
