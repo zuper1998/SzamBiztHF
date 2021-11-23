@@ -3,6 +3,8 @@
 #include "CAFFparser.h"
 
 ///https://cppcodetips.wordpress.com/2014/02/25/returning-array-of-user-defined-objects-in-jni/
+//https://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/functions.html
+// https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/types.html
 
 typedef struct _JNI_POSREC {
   jclass cls;
