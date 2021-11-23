@@ -10,9 +10,9 @@ extern "C" {
 /*
  * Class:     com_narcano_jni_CaffParser
  * Method:    CallParser
- * Signature: (Ljava/lang/String;)Lcom/narcano/jni/CAFF;
+ * Signature: (Ljava/lang/String;)[Lcom/narcano/jni/CIFF;
  */
-JNIEXPORT jobject JNICALL Java_com_narcano_jni_CaffParser_CallParser
+JNIEXPORT jobjectArray JNICALL Java_com_narcano_jni_CaffParser_CallParser
   (JNIEnv *, jobject, jstring);
 
 #ifdef __cplusplus

@@ -7,7 +7,9 @@
 typedef struct _JNI_POSREC {
   jclass cls;
     jmethodID constructortorID;
-    jfieldID nameID; 
+    jfieldID wID; 
+    jfieldID hID;
+    jfieldID arrayID;
 }JNI_POSREC;
 
 
@@ -22,7 +24,7 @@ void LoadJniPosRec(JNIEnv * env) {
  
     jniPosRec = new JNI_POSREC;
  
-    jniPosRec->cls = env->FindClass("com/narcano/jni/CAFF");
+    jniPosRec->cls = env->FindClass("com/narcano/jni/CIFF");
 
     //Class reference
     if(jniPosRec->cls != NULL)
@@ -32,26 +34,32 @@ void LoadJniPosRec(JNIEnv * env) {
     if(jniPosRec->constructortorID != NULL){
         printf("sucessfully created ctorID \n");
     }
- 
-    jniPosRec->nameID = env->GetFieldID(jniPosRec->cls, "uName", "Ljava/lang/String;");
 
+    jniPosRec->arrayID = env->GetFieldID(jniPosRec->cls, "rgb_values", "[I");
+    jniPosRec->wID = env->GetFieldID(jniPosRec->cls, "width", "I");
+    jniPosRec->hID = env->GetFieldID(jniPosRec->cls, "height", "I");
 }
 
-void FillJNIOjbectValues(JNIEnv * env, jobject jPosRec, CAFF c) {
-    env->SetObjectField(jPosRec, jniPosRec->nameID, env->NewStringUTF(c.cc.creator.c_str()));
+void FillJNIOjbectValues(JNIEnv * env, jobject jPosRec, CIFF c) {
+    env->SetIntField(jPosRec, jniPosRec->hID, env->NewStringUTF(c.height));
+    env->SetIntField(jPosRec, jniPosRec->wID, env->NewStringUTF(c.width));
 }
 
 
 //This is called from java
-JNIEXPORT jobject JNICALL Java_com_narcano_jni_CaffParser_CallParser
+JNIEXPORT jobjectArray JNICALL Java_com_narcano_jni_CaffParser_CallParser
   (JNIEnv *env, jobject thisObject, jstring filename){
     const char* fileN = env->GetStringUTFChars(filename, NULL);
     jniPosRec = NULL;
     LoadJniPosRec(env);
     CAFF caff = CAFFparser::parser(fileN);
-
-    jobject JO = env->NewObject(jniPosRec->cls, jniPosRec->constructortorID);
-    FillJNIOjbectValues(env,JO,caff);
-    return JO;
+    jobjectArray jarr = env->NewObjectArray(caff.blocks.size(), jniPosRec->cls, NULL);
+    for(int i=0;i<caff.blocks.size();i++){
+      jobject JO = env->NewObject(jniPosRec->cls, jniPosRec->constructortorID);
+      FillJNIOjbectValues(env,JO,caff.blocks[i]);
+       env->SetObjectArrayElement(jarr, i, JO);
+    }
+    
+    return jarr;
   }
 

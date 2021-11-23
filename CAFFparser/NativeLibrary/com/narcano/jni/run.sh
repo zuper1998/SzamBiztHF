@@ -1,5 +1,5 @@
 source /etc/environment 
-javac -h . CaffParser.java CAFF.java 
+javac -h . CaffParser.java CIFF.java 
 # Generate object file for each cpp (can be done in one line)
 gcc -c Block.cpp -fPIC -o Block.o 
 gcc -c CaffAnim.cpp -fPIC -o CaffAnim.o 
