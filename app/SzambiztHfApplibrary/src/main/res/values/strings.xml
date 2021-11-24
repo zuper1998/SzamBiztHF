@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="don_t_have_an_account_signup_here">Don\'t have an account? signUp here</string>
+    <string name="login">login</string>
+    <string name="enter_password">Enter password</string>
+    <string name="enter_username">Enter Username</string>
+    <string name="registrate">Registrate</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="enter_email">Enter email</string>
+    <string name="password">Password</string>
+    <string name="signup">SignUp</string>
+    <string name="save">save</string>
+</resources>

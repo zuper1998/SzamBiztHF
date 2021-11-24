@@ -41,14 +41,14 @@ public class CaffController {
     public ResponseEntity<Void> addCaff(@Valid @RequestBody @NotNull AddCaffRequest addCaffRequest) {
         Optional<User> user = ur.findByUsername( ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
         cr.save(new Caff(addCaffRequest.getTitle(), addCaffRequest.getCaffFile(), new ArrayList<>(), user.get()));
-        lr.save(new Log("Added Caff by user: " + user.get().getUsername() + " with title: " + addCaffRequest.getTitle(),java.time.LocalDateTime.now()));
+        lr.save(new Log("Added Caff by user: " + user.get().getUsername() + " with title: " + addCaffRequest.getTitle(),java.time.LocalDateTime.now().toString()));
         return  ResponseEntity.ok().build();
     }
 
     @GetMapping("/searchCaff")
     @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_USER')")
     public ResponseEntity<List<Caff>> getCaffLike(@Valid @RequestBody @NotNull SearchRequest title) {
-        lr.save(new Log("User: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() + " searched for caff with title " + title.getTitle(),java.time.LocalDateTime.now()));
+        lr.save(new Log("User: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() + " searched for caff with title " + title.getTitle(),java.time.LocalDateTime.now().toString()));
         return  ResponseEntity.ok(cr.findByTitleContaining(title.getTitle()));
     }
 
@@ -57,7 +57,7 @@ public class CaffController {
     @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_USER')")
     public ResponseEntity<String> downloadCaff(@PathVariable UUID id) {
         Optional<Caff> caff = cr.findById(id);
-        lr.save(new Log("User: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() + " downloaded Caff wit id" + id,java.time.LocalDateTime.now()));
+        lr.save(new Log("User: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() + " downloaded Caff wit id" + id,java.time.LocalDateTime.now().toString()));
         return caff.map(value -> ResponseEntity.ok(value.getCaffFile())).orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
@@ -73,7 +73,7 @@ public class CaffController {
             }
             responses.add(caffResponse);
         }
-        lr.save(new Log("User: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() + " getAll caffs",java.time.LocalDateTime.now()));
+        lr.save(new Log("User: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() + " getAll caffs",java.time.LocalDateTime.now().toString()));
         return ResponseEntity.ok(responses);
     }
 
@@ -84,7 +84,7 @@ public class CaffController {
         if(caff.isEmpty()) return ResponseEntity.badRequest().build();
         caff.get().setTitle(updateCaffRequest.getTitle());
         cr.save(caff.get());
-        lr.save(new Log("Caff with id: " + id + " updated by admin: " +  ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername(),java.time.LocalDateTime.now()));
+        lr.save(new Log("Caff with id: " + id + " updated by admin: " +  ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername(),java.time.LocalDateTime.now().toString()));
         return ResponseEntity.ok().build();
     }
 
@@ -94,7 +94,8 @@ public class CaffController {
         Optional<Caff> caff = cr.findById(id);
         if(caff.isEmpty()) return ResponseEntity.badRequest().build();
         cr.delete(caff.get());
-        lr.save(new Log("Deleted Caff with id: " + id + " by admin: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername(), java.time.LocalDateTime.now()));
+        lr.save(new Log("Deleted Caff with id: " + id + " by admin: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername(), java.time.LocalDateTime.now().toString()));
         return ResponseEntity.ok().build();
     }
+
 }

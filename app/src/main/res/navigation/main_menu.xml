@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_menu"
+    app:startDestination="@id/HomeFragment">
+
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.e.caffuserapp.Controller.Fragments.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/AccountFragment"
+        android:name="com.e.caffuserapp.Controller.Fragments.AccountFragment"
+        android:label="AccountFragment" />
+</navigation>

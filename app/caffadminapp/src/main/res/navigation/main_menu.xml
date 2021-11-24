@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_menu"
+    app:startDestination="@id/HomeFragment">
+
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.e.caffadminapp.Controller.Fragments.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/LogFragment"
+        android:name="com.e.caffadminapp.Controller.Fragments.LogFragment"
+        android:label="LogFragment" />
+    <fragment
+        android:id="@+id/UserManagementFragment"
+        android:name="com.e.caffadminapp.Controller.Fragments.UserManagementFragment"
+        android:label="UserManagementFragment" />
+    <fragment
+        android:id="@+id/AccountDetailsFragment"
+        android:name="com.e.caffadminapp.Controller.Fragments.AccountDetailsFragment"
+        android:label="fragment_account_details"
+        tools:layout="@layout/fragment_account_details" />
+    <fragment
+        android:id="@+id/NewUserFragment"
+        android:name="com.e.caffadminapp.Controller.Fragments.NewUserFragment"
+        android:label="NewUserFragment" />
+    <fragment
+        android:id="@+id/AccountFragment"
+        android:name="com.e.caffadminapp.Controller.Fragments.AccountFragment"
+        android:label="AccountFragment" />
+</navigation>

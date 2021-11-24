@@ -9,8 +9,6 @@ public class UpdateUserRequest {
     @NotBlank
     private String email;
 
-    @NotNull
-    @NotBlank
     private String password;
 
     public String getEmail() {

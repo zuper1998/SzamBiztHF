@@ -1,0 +1,4 @@
+include ':app:caffadminapp'
+include ':app:SzambiztHfApplibrary'
+include ':app'
+rootProject.name = "CaffUserApp"

@@ -44,7 +44,7 @@ public class CommentController {
         Optional<Caff> caff = caffRepository.findById(id);
         if(caff.isEmpty() || user.isEmpty()) return ResponseEntity.badRequest().build();
         commentRepository.save(new Comment(addCommentRequest.getText(), caff.get(), user.get()));
-        logRepository.save(new Log("User with name: " + user.get().getUsername() + " commented on Caff with id: " + id + " with text: " + addCommentRequest.getText(), java.time.LocalDateTime.now()));
+        logRepository.save(new Log("User with name: " + user.get().getUsername() + " commented on Caff with id: " + id + " with text: " + addCommentRequest.getText(), java.time.LocalDateTime.now().toString()));
         return  ResponseEntity.ok().build();
     }
 
@@ -55,7 +55,7 @@ public class CommentController {
         if(comment.isEmpty()) return ResponseEntity.badRequest().build();
         comment.get().setText(updateCommentRequest.getText());
         commentRepository.save(comment.get());
-        logRepository.save(new Log("Updated comment with id: " + id + " by admin: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() + " with text " + updateCommentRequest.getText(), java.time.LocalDateTime.now()));
+        logRepository.save(new Log("Updated comment with id: " + id + " by admin: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() + " with text " + updateCommentRequest.getText(), java.time.LocalDateTime.now().toString()));
         return ResponseEntity.ok().build();
     }
 
@@ -63,7 +63,7 @@ public class CommentController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteComment(@PathVariable UUID id) {
         commentRepository.delete(commentRepository.getById(id));
-        logRepository.save(new Log("Deleted comment with id: " + id + " by admin: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername(), java.time.LocalDateTime.now()));
+        logRepository.save(new Log("Deleted comment with id: " + id + " by admin: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername(), java.time.LocalDateTime.now().toString()));
         return ResponseEntity.ok().build();
     }
 }

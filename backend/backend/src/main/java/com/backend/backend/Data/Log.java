@@ -3,7 +3,6 @@ package com.backend.backend.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 
@@ -16,9 +15,9 @@ public class Log {
 
     private String event;
 
-    private LocalDateTime date;
+    private String date;
 
-    public Log(String event, LocalDateTime date) {
+    public Log(String event, String date) {
         this.event = event;
         this.date = date;
     }
@@ -37,11 +36,11 @@ public class Log {
     public String getEvent() {return this.event;}
     public void  setEvent(String event) {this.event = event;}
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }
