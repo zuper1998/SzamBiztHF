@@ -46,7 +46,6 @@ jobject FillJNIOjbectValues(JNIEnv * env, CIFF c) {
     
     int tlen = c.pixels.size()*3;
     //Call CTOR
-    printf("OWO\n");
 
     jintArray iarr =  env->NewIntArray(tlen);
     jint * temparr = new jint[tlen];              
@@ -66,11 +65,8 @@ jobject FillJNIOjbectValues(JNIEnv * env, CIFF c) {
         temparr[i] = tmp;
       }
     }
-    printf("UWU\n");
     env->SetIntArrayRegion(iarr, 0, tlen, temparr);
-    printf("UWU\n");
     jobject result = env->NewObject(jniPosRec->cls, jniPosRec->constructortorID,iarr );
-    printf("UWU\n");
     
     env->SetIntField(result, jniPosRec->hID, (int)c.height);
     env->SetIntField(result, jniPosRec->wID, (int)c.width);
