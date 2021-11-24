@@ -10,5 +10,9 @@ public class CIFF {
         height=0;
 
     }
-    
+    public CIFF(int[] arr){
+        width=0;
+        height=0;
+        rgb_values = arr;
+    }
 }

@@ -12,18 +12,19 @@ CAFF CAFFparser::parser(const std::string &filename) {
     CAFF main;
 
     //if (std::fstream file(filename, std::ios::in | std::ios::out | std::ios::binary);file) {
-    std::ifstream file(filename);
+    std::ifstream file(filename,std::ios::in | std::ios::out | std::ios::binary);
 
-        do {
+         while (!file.eof()) {
             //This will be loop
-            int ID; //		0x1 - header 0x2 - credits 0x3 - animation
+            int ID=0; //		0x1 - header 0x2 - credits 0x3 - animation
             file.read((char *) &ID, 1);
-
+            printf("%d\n", ID);
 
             //length --- DATA LENGTH not TOTAL LENGTH
             size_t len;
             file.read((char *) &len, 8);
             auto magic = std::make_unique<char[]>(5);
+            
             //credit
 
             size_t year;
@@ -35,6 +36,7 @@ CAFF CAFFparser::parser(const std::string &filename) {
             auto creator = std::unique_ptr<char[]>();
             //Anim
             size_t duration;
+            if(file.eof()) return main;
             switch (ID) {
                 case 1: //Header
                     file.read(magic.get(), 4);
@@ -73,6 +75,7 @@ CAFF CAFFparser::parser(const std::string &filename) {
 
                     break;
                 case 3: //Anim
+
                     if(main.toManyAnim()){//not gonna read ahead if there is nothing there :D
                         file.close();
                         return main;
@@ -84,7 +87,7 @@ CAFF CAFFparser::parser(const std::string &filename) {
                 default:
                     throw std::invalid_argument("Unrecognized CAFF ID");
             }
-        } while (!file.good());
+        }
     //}
     return main;
 }

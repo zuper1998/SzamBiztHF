@@ -8,7 +8,7 @@
 #include <vector>
 class CIFFparser {
 public:
-    static CIFF parser (std::fstream&);
+    static CIFF parser (std::ifstream&);
 
 };
 
