@@ -18,7 +18,7 @@ CAFF CAFFparser::parser(const std::string &filename) {
             //This will be loop
             int ID=0; //		0x1 - header 0x2 - credits 0x3 - animation
             file.read((char *) &ID, 1);
-            printf("%d\n", ID);
+            //printf("%d\n", ID);
 
             //length --- DATA LENGTH not TOTAL LENGTH
             size_t len;
