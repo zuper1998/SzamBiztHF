@@ -29,13 +29,13 @@ void LoadJniPosRec(JNIEnv * env) {
     jniPosRec->cls = env->FindClass("com/narcano/jni/CIFF");
 
     //Class reference
-    if(jniPosRec->cls != NULL)
-        printf("sucessfully created class \n");
+    //if(jniPosRec->cls != NULL)
+    //    printf("sucessfully created class \n");
     //Ctor reference
     jniPosRec->constructortorID = env->GetMethodID(jniPosRec->cls, "<init>", "([I)V");
-    if(jniPosRec->constructortorID != NULL){
-        printf("sucessfully created ctorID \n");
-    }
+    //if(jniPosRec->constructortorID != NULL){
+    //    printf("sucessfully created ctorID \n");
+    //}
 
     jniPosRec->arrayID = env->GetFieldID(jniPosRec->cls, "rgb_values", "[I");
     jniPosRec->wID = env->GetFieldID(jniPosRec->cls, "width", "I");
