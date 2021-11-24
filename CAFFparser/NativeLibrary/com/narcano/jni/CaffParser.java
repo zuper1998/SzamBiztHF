@@ -10,7 +10,7 @@ public class CaffParser {
         System.load("/home/narcano/SzB/SzamBiztHF/CAFFparser/NativeLibrary/com/narcano/jni/libnative.so");
         CIFF[] ciffs =new CaffParser().CallParser("/home/narcano/SzB/SzamBiztHF/CAFFparser/NativeLibrary/com/narcano/jni/1.caff");
         for(CIFF c : ciffs){
-            System.out.println("W: "+c.width+" H:"+c.height);
+            System.out.println("W: "+c.width+" H:"+c.height+" Dur: "+c.duration);
         }
     }
 

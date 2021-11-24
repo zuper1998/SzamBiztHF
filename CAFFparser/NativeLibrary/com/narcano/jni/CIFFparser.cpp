@@ -10,7 +10,7 @@
 #include <stdexcept>
 #include <memory>
 
-CIFF CIFFparser::parser(std::fstream& file) {
+CIFF CIFFparser::parser(std::ifstream& file) {
         auto magic = std::make_unique<char[]>(5);
         //Magic
         file.read(magic.get(), 4);
@@ -75,7 +75,6 @@ CIFF CIFFparser::parser(std::fstream& file) {
             px.emplace_back(r,g,b);
 
         }while((px.size()*3+3)<=contentSize);
-
 
 
 
