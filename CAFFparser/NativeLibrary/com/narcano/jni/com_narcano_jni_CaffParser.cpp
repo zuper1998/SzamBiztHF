@@ -12,6 +12,7 @@ typedef struct _JNI_POSREC {
     jfieldID wID; 
     jfieldID hID;
     jfieldID arrayID;
+    jfieldID durID;
 }JNI_POSREC;
 
 
@@ -40,9 +41,11 @@ void LoadJniPosRec(JNIEnv * env) {
     jniPosRec->arrayID = env->GetFieldID(jniPosRec->cls, "rgb_values", "[I");
     jniPosRec->wID = env->GetFieldID(jniPosRec->cls, "width", "I");
     jniPosRec->hID = env->GetFieldID(jniPosRec->cls, "height", "I");
+    jniPosRec->durID = env->GetFieldID(jniPosRec->cls, "duration", "I");
+
 }
 
-jobject FillJNIOjbectValues(JNIEnv * env, CIFF c) {
+jobject FillJNIOjbectValues(JNIEnv * env, CIFF c,CaffAnim ca) {
     
     int tlen = c.pixels.size()*3;
     //Call CTOR
@@ -70,6 +73,8 @@ jobject FillJNIOjbectValues(JNIEnv * env, CIFF c) {
     
     env->SetIntField(result, jniPosRec->hID, (int)c.height);
     env->SetIntField(result, jniPosRec->wID, (int)c.width);
+    env->SetIntField(result, jniPosRec->durID, (int)ca.duration);
+
     //https://edux.pjwstk.edu.pl/mat/268/lec/lect10/lecture10.html last part, using ctor for this
     return result;
 
@@ -88,10 +93,11 @@ JNIEXPORT jobjectArray JNICALL Java_com_narcano_jni_CaffParser_CallParser
     jniPosRec = NULL;
     LoadJniPosRec(env);
     CAFF caff = CAFFparser::parser(fileN);
+    //caff.print();
     jobjectArray jarr = env->NewObjectArray(caff.blocks.size(), jniPosRec->cls, NULL);
     for(int i=0;i<caff.blocks.size();i++){
       //jobject JO = env->NewObject(jniPosRec->cls, jniPosRec->constructortorID); we are calling the ctor in the next function
-      jobject JO = FillJNIOjbectValues(env,caff.blocks[i].ciff);
+      jobject JO = FillJNIOjbectValues(env,caff.blocks[i].ciff,caff.blocks[i]);
       env->SetObjectArrayElement(jarr, i, JO);
     }
     

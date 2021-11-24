@@ -30,7 +30,7 @@ public:
 
         int cnt=0;
         for(auto b : blocks){
-            std::cout<<b.ciff.caption;
+            std::cout<<b.duration<<"\n";
             b.Visual(cnt++);
         }
     }
