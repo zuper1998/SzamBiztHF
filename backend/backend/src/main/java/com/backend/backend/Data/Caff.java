@@ -23,7 +23,7 @@ public class Caff {
     private String title;
 
     @NotBlank
-    private String caffFile;
+    private String caffFilePath;
 
     @OneToMany(mappedBy = "caffPost")
     private List<Comment> comments;
@@ -35,7 +35,7 @@ public class Caff {
 
     public Caff(String title, String caffFile, List<Comment> comments, User user) {
         this.title = title;
-        this.caffFile = caffFile;
+        this.caffFilePath = caffFile;
         this.comments = comments;
         this.user = user;
     }
@@ -57,11 +57,11 @@ public class Caff {
     public void setTitle(String title) {this.title = title;}
 
     public String getCaffFile() {
-        return caffFile;
+        return caffFilePath;
     }
 
     public void setCaffFile(String caff) {
-        this.caffFile = caff;
+        this.caffFilePath = caff;
     }
 
     @JsonIgnore
