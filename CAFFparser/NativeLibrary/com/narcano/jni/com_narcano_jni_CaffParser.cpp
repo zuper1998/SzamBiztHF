@@ -91,6 +91,7 @@ JNIEXPORT jobjectArray JNICALL Java_com_narcano_jni_CaffParser_CallParser
   (JNIEnv *env, jobject thisObject, jstring filename){
     const char* fileN = env->GetStringUTFChars(filename, NULL);
     jniPosRec = NULL;
+    
     LoadJniPosRec(env);
     CAFF caff = CAFFparser::parser(fileN);
     //caff.print();
