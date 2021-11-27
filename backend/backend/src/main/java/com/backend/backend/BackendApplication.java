@@ -3,6 +3,8 @@ package com.backend.backend;
 import com.backend.backend.Data.*;
 import com.backend.backend.Repository.RoleRepository;
 import com.backend.backend.Repository.UserRepository;
+import com.narcano.jni.CIFF;
+import com.narcano.jni.CaffParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

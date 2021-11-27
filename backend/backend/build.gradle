@@ -1,16 +1,26 @@
 plugins {
+	id 'java'
+	id 'application'
+
 	id 'org.springframework.boot' version '2.5.5'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
-	id 'c'
 }
 
+import org.gradle.util.GradleVersion
 group = 'com.backend'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+//sourceCompatibility = '11' TODO: Ezt kivettem nem tudom mennyire oof de nelkule nem megy semmi
+
 
 repositories {
 	mavenCentral()
+}
+application {
+	if (GradleVersion.current() >= GradleVersion.version('6.7')) {
+		mainClass = 'com.backend.backend.BackendApplication'
+	} else {
+		mainClassName = 'com.backend.backend.BackendApplication'
+	}
 }
 
 dependencies {
@@ -33,27 +43,24 @@ dependencies {
 
 	//runtimeOnly("mysql:mysql-connector-java")
 	//runtimeOnly("com.oracle:ojdbc7:12.1.0.2.0")
+	//Native stuf
+	implementation project(':jni-library')
+
+
 }
+
+application {
+	if (GradleVersion.current() >= GradleVersion.version('6.7')) {
+		mainClass = 'com.narcano.jni.CaffParser'
+	} else {
+		mainClassName = 'com.narcano.jni.CaffParser'
+	}
+}
+
 
 test {
 	useJUnitPlatform()
 	systemProperty "java.library.path", file("${buildDir}/libs/com_narcano_jni_CaffParser/shared").absolutePath
 }
 
-model {
-	platforms {
-		x64 {
-			architecture "x64"
-		}
-	}
 
-	components {
-		com_narcano_jni_CaffParser(NativeLibrarySpec) {
-			binaries.all {
-				cCompiler.args "-I${org.gradle.internal.jvm.Jvm.current().javaHome}/include"
-				cCompiler.args "-I${org.gradle.internal.jvm.Jvm.current().javaHome}/include/win32"
-				linker.args "Shlwapi.lib", "Advapi32.lib"
-			}
-		}
-	}
-}

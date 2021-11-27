@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CaffUserApp.iml" filepath="$PROJECT_DIR$/.idea/modules/CaffUserApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CaffUserApp.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CaffUserApp.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SzambiztHfApplibrary/CaffUserApp.app.SzambiztHfApplibrary.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SzambiztHfApplibrary/CaffUserApp.app.SzambiztHfApplibrary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/caffadminapp/CaffUserApp.app.caffadminapp.iml" filepath="$PROJECT_DIR$/.idea/modules/app/caffadminapp/CaffUserApp.app.caffadminapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SzamBiztHF.iml" filepath="$PROJECT_DIR$/.idea/modules/SzamBiztHF.iml" />
     </modules>
   </component>
 </project>
