@@ -11,10 +11,8 @@ import com.backend.backend.Repository.CaffRepository;
 import com.backend.backend.Repository.LogRepository;
 import com.backend.backend.Repository.UserRepository;
 import com.backend.backend.Security.UserDetailsImpl;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
+import com.narcano.jni.CIFF;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,7 +24,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -34,7 +31,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 
-
+import com.narcano.jni.CaffParser;
 @RestController
 @RequestMapping("/api/caff")
 public class CaffController {
@@ -95,6 +92,9 @@ public class CaffController {
         List<Caff> caffs = cr.findAll();
         List<GetAllCaffResponse> responses = new ArrayList<>();
         for(int i=0; i<caffs.size(); i++) {
+            CaffParser parser = new CaffParser();
+            parser.CallParser(caffs.get(i).getCaffFile());
+            //System.out.println(result.length);
             GetAllCaffResponse caffResponse = new GetAllCaffResponse(caffs.get(i), caffs.get(i).getUser().getUsername(), new ArrayList<>());
             for(int j=0; j<caffs.get(i).getComments().size(); j++) {
                 caffResponse.getComments().add(new GetCommentResponse(caffs.get(i).getComments().get(j).getId(), caffs.get(i).getComments().get(j).getText(), caffs.get(i).getComments().get(j).getUser().getUsername()));
