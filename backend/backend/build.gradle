@@ -6,7 +6,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
 
-import org.gradle.util.GradleVersion
+//import org.gradle.util.GradleVersion
 group = 'com.backend'
 version = '0.0.1-SNAPSHOT'
 //sourceCompatibility = '11' TODO: Ezt kivettem nem tudom mennyire oof de nelkule nem megy semmi

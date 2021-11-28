@@ -56,6 +56,7 @@ public class Caff {
 
     public void setTitle(String title) {this.title = title;}
 
+    @JsonIgnore
     public String getCaffFile() {
         return caffFilePath;
     }

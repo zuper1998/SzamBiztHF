@@ -11,7 +11,6 @@ import com.backend.backend.Repository.CaffRepository;
 import com.backend.backend.Repository.LogRepository;
 import com.backend.backend.Repository.UserRepository;
 import com.backend.backend.Security.UserDetailsImpl;
-import com.narcano.jni.CIFF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +31,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.narcano.jni.CaffParser;
+import com.narcano.jni.CIFF;
 @RestController
 @RequestMapping("/api/caff")
 public class CaffController {
@@ -85,7 +85,7 @@ public class CaffController {
                     "attachment; filename=\"" + file.getName() + "\"").body(file);
         }
     }
-    //TODO:Call parser
+
     @GetMapping("/getAllCaff")
     @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_USER')")
     public ResponseEntity<List<GetAllCaffResponse>> getAllCaff() {
@@ -93,9 +93,8 @@ public class CaffController {
         List<GetAllCaffResponse> responses = new ArrayList<>();
         for(int i=0; i<caffs.size(); i++) {
             CaffParser parser = new CaffParser();
-            parser.CallParser(caffs.get(i).getCaffFile());
-            //System.out.println(result.length);
-            GetAllCaffResponse caffResponse = new GetAllCaffResponse(caffs.get(i), caffs.get(i).getUser().getUsername(), new ArrayList<>());
+            CIFF[] ciffs = parser.CallParser(caffs.get(i).getCaffFile());
+            GetAllCaffResponse caffResponse = new GetAllCaffResponse(caffs.get(i).getId(), ciffs, caffs.get(i).getUser().getUsername(), new ArrayList<>());
             for(int j=0; j<caffs.get(i).getComments().size(); j++) {
                 caffResponse.getComments().add(new GetCommentResponse(caffs.get(i).getComments().get(j).getId(), caffs.get(i).getComments().get(j).getText(), caffs.get(i).getComments().get(j).getUser().getUsername()));
             }
