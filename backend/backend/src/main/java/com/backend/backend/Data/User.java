@@ -1,6 +1,7 @@
 package com.backend.backend.Data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -16,6 +17,7 @@ public class User {
 
     @Id
     @GeneratedValue
+    @Type(type="uuid-char")
     private UUID id;
 
     @NotBlank

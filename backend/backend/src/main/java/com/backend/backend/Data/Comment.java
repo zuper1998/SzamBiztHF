@@ -3,6 +3,7 @@ package com.backend.backend.Data;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -13,6 +14,7 @@ public class Comment {
 
     @Id
     @GeneratedValue
+    @Type(type="uuid-char")
     private UUID id;
 
     @NotBlank

@@ -42,7 +42,10 @@ public class CommentController {
     public ResponseEntity<Void> addComment(@Valid @RequestBody @NotNull AddCommentRequest addCommentRequest, @PathVariable UUID id) {
         Optional<User> user = userRepository.findByUsername( ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
         Optional<Caff> caff = caffRepository.findById(id);
-        if(caff.isEmpty() || user.isEmpty()) return ResponseEntity.badRequest().build();
+        if(caff.isEmpty() || user.isEmpty()) {
+            logRepository.save(new Log("User with name: " + user.get().getUsername() + " failed to comment on Caff with id: " + id + " with text: " + addCommentRequest.getText() + " due to wrong id", java.time.LocalDateTime.now().toString()));
+            return ResponseEntity.badRequest().build();
+        }
         commentRepository.save(new Comment(addCommentRequest.getText(), caff.get(), user.get()));
         logRepository.save(new Log("User with name: " + user.get().getUsername() + " commented on Caff with id: " + id + " with text: " + addCommentRequest.getText(), java.time.LocalDateTime.now().toString()));
         return  ResponseEntity.ok().build();
@@ -52,7 +55,10 @@ public class CommentController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> updateComment(@Valid @RequestBody @NotNull UpdateCommentRequest updateCommentRequest, @PathVariable UUID id) {
         Optional<Comment> comment = commentRepository.findById(id);
-        if(comment.isEmpty()) return ResponseEntity.badRequest().build();
+        if(comment.isEmpty())  {
+            logRepository.save(new Log("Failed to update comment with id: " + id + " by admin: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() + " with text " + updateCommentRequest.getText() + ", due to wrong id ", java.time.LocalDateTime.now().toString()));
+            return ResponseEntity.badRequest().build();
+        }
         comment.get().setText(updateCommentRequest.getText());
         commentRepository.save(comment.get());
         logRepository.save(new Log("Updated comment with id: " + id + " by admin: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() + " with text " + updateCommentRequest.getText(), java.time.LocalDateTime.now().toString()));

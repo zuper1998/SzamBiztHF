@@ -1,5 +1,7 @@
 package com.backend.backend.Data;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,6 +13,7 @@ public class Log {
 
     @Id
     @GeneratedValue
+    @Type(type="uuid-char")
     private UUID id;
 
     private String event;

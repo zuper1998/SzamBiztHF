@@ -56,16 +56,18 @@ public class CaffController {
             lr.save(new Log("Added Caff by user: " + user.get().getUsername() + " with title: " + title,java.time.LocalDateTime.now().toString()));
             return ResponseEntity.ok().build();
         }
+        lr.save(new Log("Failed to add Caff by user: " + user.get().getUsername() + " with title: " + title + ",due to no file in params",java.time.LocalDateTime.now().toString()));
         return  ResponseEntity.badRequest().build();
     }
 
 
-    //TODO: Call parser
     @GetMapping("/searchCaff")
     @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_USER')")
-    public ResponseEntity<List<Caff>> getCaffLike(@Valid @RequestBody @NotNull SearchRequest title) {
+    public ResponseEntity<List<GetAllCaffResponse>> getCaffLike(@Valid @RequestBody @NotNull SearchRequest title) {
+        List<Caff> caffs = cr.findByTitleContaining(title.getTitle());
+        List<GetAllCaffResponse> responses = parseCaffRequest(caffs);
         lr.save(new Log("User: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() + " searched for caff with title " + title.getTitle(),java.time.LocalDateTime.now().toString()));
-        return  ResponseEntity.ok(cr.findByTitleContaining(title.getTitle()));
+        return  ResponseEntity.ok(responses);
     }
 
     @GetMapping("/downloadCaff/{id}")
@@ -90,16 +92,7 @@ public class CaffController {
     @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_USER')")
     public ResponseEntity<List<GetAllCaffResponse>> getAllCaff() {
         List<Caff> caffs = cr.findAll();
-        List<GetAllCaffResponse> responses = new ArrayList<>();
-        for(int i=0; i<caffs.size(); i++) {
-            CaffParser parser = new CaffParser();
-            CIFF[] ciffs = parser.CallParser(caffs.get(i).getCaffFile());
-            GetAllCaffResponse caffResponse = new GetAllCaffResponse(caffs.get(i).getId(), ciffs, caffs.get(i).getUser().getUsername(), new ArrayList<>());
-            for(int j=0; j<caffs.get(i).getComments().size(); j++) {
-                caffResponse.getComments().add(new GetCommentResponse(caffs.get(i).getComments().get(j).getId(), caffs.get(i).getComments().get(j).getText(), caffs.get(i).getComments().get(j).getUser().getUsername()));
-            }
-            responses.add(caffResponse);
-        }
+        List<GetAllCaffResponse> responses = parseCaffRequest(caffs);
         lr.save(new Log("User: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() + " getAll caffs",java.time.LocalDateTime.now().toString()));
         return ResponseEntity.ok(responses);
     }
@@ -108,7 +101,10 @@ public class CaffController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> updateCaff(@Valid @RequestBody @NotNull UpdateCaffRequest updateCaffRequest, @PathVariable UUID id) {
         Optional<Caff> caff = cr.findById(id);
-        if(caff.isEmpty()) return ResponseEntity.badRequest().build();
+        if(caff.isEmpty()) {
+            lr.save(new Log("Caff with id: " + id + " failed to update by admin: " +  ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() + ", due to wrong id",java.time.LocalDateTime.now().toString()));
+            return ResponseEntity.badRequest().build();
+        }
         caff.get().setTitle(updateCaffRequest.getTitle());
         cr.save(caff.get());
         lr.save(new Log("Caff with id: " + id + " updated by admin: " +  ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername(),java.time.LocalDateTime.now().toString()));
@@ -119,7 +115,10 @@ public class CaffController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteCaff(@PathVariable UUID id) {
         Optional<Caff> caff = cr.findById(id);
-        if(caff.isEmpty()) return ResponseEntity.badRequest().build();
+        if(caff.isEmpty()) {
+            lr.save(new Log("Failed to delete Caff with id: " + id + " by admin: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() + ", due to wrong id", java.time.LocalDateTime.now().toString()));
+            return ResponseEntity.badRequest().build();
+        }
         cr.delete(caff.get());
         File file = new File(caff.get().getCaffFile());
         file.delete();
@@ -127,4 +126,16 @@ public class CaffController {
         return ResponseEntity.ok().build();
     }
 
+    private List<GetAllCaffResponse> parseCaffRequest(List<Caff> caffs) {
+        List<GetAllCaffResponse> responses = new ArrayList<>();
+        for(int i=0; i<caffs.size(); i++) {
+            CIFF[] ciffs = new CaffParser().CallParser(caffs.get(i).getCaffFile());
+            GetAllCaffResponse caffResponse = new GetAllCaffResponse(caffs.get(i).getId(), ciffs, caffs.get(i).getUser().getUsername(), new ArrayList<>());
+            for(int j=0; j<caffs.get(i).getComments().size(); j++) {
+                caffResponse.getComments().add(new GetCommentResponse(caffs.get(i).getComments().get(j).getId(), caffs.get(i).getComments().get(j).getText(), caffs.get(i).getComments().get(j).getUser().getUsername()));
+            }
+            responses.add(caffResponse);
+        }
+        return responses;
+    }
 }

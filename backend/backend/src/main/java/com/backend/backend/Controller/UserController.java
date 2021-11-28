@@ -48,10 +48,13 @@ public class UserController {
 
     @PostMapping("/registration")
     public ResponseEntity<Void> registration(@Valid @RequestBody @NotNull SignUpRequest signUpMessage) {
-        if (ur.existsByUsername(signUpMessage.getUsername())) return ResponseEntity.badRequest().build();
+        if (ur.existsByUsername(signUpMessage.getUsername())) {
+            logRepository.save(new Log("Registration failed for user: " + signUpMessage.getUsername() + ", due to duplicated usernames", java.time.LocalDateTime.now().toString()));
+            return ResponseEntity.badRequest().build();
+        }
         User NewUser = new User(signUpMessage.getUsername(), signUpMessage.getEmail(), encoder.encode(signUpMessage.getPassword()), new ArrayList<>(), new ArrayList<>());
-        Role userRole = roleRepository.findByName(RoleEnum.ROLE_USER);
-        NewUser.setRoles(Set.of(userRole));
+        Optional<Role> userRole = roleRepository.findByName(RoleEnum.ROLE_USER);
+        NewUser.setRoles(Set.of(userRole.get()));
         ur.save(NewUser);
         logRepository.save(new Log("Registration for user: " + NewUser.getUsername(), java.time.LocalDateTime.now().toString()));
         return ResponseEntity.ok().build();
@@ -59,21 +62,24 @@ public class UserController {
 
     @PostMapping("/login/admin")
     public ResponseEntity<LoginResponse> loginAdmin(@Valid @RequestBody @NotNull LoginRequest loginRequest) {
-        Role role = roleRepository.findByName(RoleEnum.ROLE_ADMIN);
-        return login(loginRequest, role);
+        Optional<Role> role = roleRepository.findByName(RoleEnum.ROLE_ADMIN);
+        return login(loginRequest, role.get());
     }
 
     @PostMapping("/login/user")
     public ResponseEntity<LoginResponse> loginUser(@Valid @RequestBody @NotNull LoginRequest loginRequest) {
-        Role role = roleRepository.findByName(RoleEnum.ROLE_USER);
-        return login(loginRequest, role);
+        Optional<Role> role = roleRepository.findByName(RoleEnum.ROLE_USER);
+        return login(loginRequest, role.get());
     }
 
     public ResponseEntity<LoginResponse> login(LoginRequest loginRequest, Role role) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        if(!userDetails.hasRole(role)) return ResponseEntity.badRequest().build();
+        if(!userDetails.hasRole(role)) {
+            logRepository.save(new Log("Login for user: " + loginRequest.getUsername() + " failed, due to wrong url call", java.time.LocalDateTime.now().toString()));
+            return ResponseEntity.badRequest().build();
+        }
         String jwt = jwtUtils.generateJwtToken(authentication);
         logRepository.save(new Log("Login for user: " + loginRequest.getUsername(), java.time.LocalDateTime.now().toString()));
         return ResponseEntity.ok(new LoginResponse(userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), jwt));
@@ -83,10 +89,19 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_USER')")
     public ResponseEntity<String> userUpdateUser(@Valid @RequestBody @NotNull UpdateUserRequest updateRequest, @PathVariable UUID id) {
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (!dataAccessAuth.UserDataAccess(id, userDetails)) return ResponseEntity.badRequest().build();
+        if (!dataAccessAuth.UserDataAccess(id, userDetails)) {
+            logRepository.save(new Log("User data Update for: " + updateRequest.getEmail() + " by user: " + userDetails.getUsername() + "failed, due to data access violation", java.time.LocalDateTime.now().toString()));
+            return ResponseEntity.badRequest().build();
+        }
         Optional<User> user = ur.findById(id);
-        if (user.isEmpty()) return ResponseEntity.badRequest().build();
-        if(updateRequest.getPassword().isEmpty() || updateRequest.getPassword().equals("")) return ResponseEntity.badRequest().build();
+        if (user.isEmpty()) {
+            logRepository.save(new Log("User data Update for: " + updateRequest.getEmail() + " by user: " + userDetails.getUsername() + "failed, due to wrong given id", java.time.LocalDateTime.now().toString()));
+            return ResponseEntity.badRequest().build();
+        }
+        if(updateRequest.getPassword().isEmpty() || updateRequest.getPassword().equals("")) {
+            logRepository.save(new Log("User data Update for: " + updateRequest.getEmail() + " by user: " + userDetails.getUsername() + "failed, due to field (password) emptiness", java.time.LocalDateTime.now().toString()));
+            return ResponseEntity.badRequest().build();
+        }
         user.get().setEmail(updateRequest.getEmail());
         user.get().setPassword(encoder.encode(updateRequest.getPassword()));
         ur.save(user.get());
@@ -107,7 +122,11 @@ public class UserController {
                 user.get().setPassword(encoder.encode(updateRequest.getPassword()));
             }
         }
-        else return ResponseEntity.badRequest().build();
+        else {
+            logRepository.save(new Log("User data Update for user with id: " + id.toString() + " by user: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() +" failed, due to wrong id", java.time.LocalDateTime.now().toString()));
+            return ResponseEntity.badRequest().build();
+        }
+        logRepository.save(new Log("User data Update for user with id: " + id.toString() + " by user: " +((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername(), java.time.LocalDateTime.now().toString()));
         ur.save(user.get());
         return ResponseEntity.ok().build();
     }
@@ -121,7 +140,7 @@ public class UserController {
         if(signUpMessage.getRoles() != null) {
             if (!signUpMessage.getRoles().isEmpty()) {
                 for (String roles : signUpMessage.getRoles()) {
-                    Role role;
+                    Optional<Role> role;
                     switch (roles) {
                         case "ROLE_ADMIN":
                             role = roleRepository.findByName(RoleEnum.ROLE_ADMIN);
@@ -132,13 +151,13 @@ public class UserController {
                             logRepository.save(new Log("Registration for user: " + newUser.getUsername() + " by admin" + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername(), java.time.LocalDateTime.now().toString()));
                             break;
                     }
-                    roleSet.add(role);
-                    newUser.getRoles().add(role);
+                    roleSet.add(role.get());
+                    newUser.getRoles().add(role.get());
                 }
             }
         }
-        Role userRole = roleRepository.findByName(RoleEnum.ROLE_USER);
-        newUser.setRoles(Set.of(userRole));
+        Optional<Role> userRole = roleRepository.findByName(RoleEnum.ROLE_USER);
+        newUser.setRoles(Set.of(userRole.get()));
         ur.save(newUser);
         return ResponseEntity.ok().build();
     }
@@ -147,7 +166,10 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteUser(@PathVariable UUID id) {
         Optional<User> user = ur.findById(id);
-        if(user.isEmpty()) return ResponseEntity.badRequest().build();
+        if(user.isEmpty()) {
+            logRepository.save(new Log("Deleted user with id: " + id + " by admin: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() + " failed, due to wrong id", java.time.LocalDateTime.now().toString()));
+            return ResponseEntity.badRequest().build();
+        }
         ur.delete(user.get());
         logRepository.save(new Log("Deleted user with id: " + id + " by admin: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername(), java.time.LocalDateTime.now().toString()));
         return ResponseEntity.ok().build();

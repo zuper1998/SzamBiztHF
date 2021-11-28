@@ -6,7 +6,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
 
-//import org.gradle.util.GradleVersion
+import org.gradle.util.GradleVersion
 group = 'com.backend'
 version = '0.0.1-SNAPSHOT'
 //sourceCompatibility = '11' TODO: Ezt kivettem nem tudom mennyire oof de nelkule nem megy semmi
@@ -41,8 +41,8 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 
-	//runtimeOnly("mysql:mysql-connector-java")
-	//runtimeOnly("com.oracle:ojdbc7:12.1.0.2.0")
+	runtimeOnly("mysql:mysql-connector-java")
+	runtimeOnly("com.oracle:ojdbc7:12.1.0.2.0")
 	//Native stuf
 	implementation project(':jni-library')
 

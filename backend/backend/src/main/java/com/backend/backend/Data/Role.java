@@ -1,5 +1,7 @@
 package com.backend.backend.Data;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.UUID;
 
@@ -7,6 +9,7 @@ import java.util.UUID;
 public class Role {
     @Id
     @GeneratedValue
+    @Type(type="uuid-char")
     private UUID id;
 
     @Enumerated(EnumType.STRING)
