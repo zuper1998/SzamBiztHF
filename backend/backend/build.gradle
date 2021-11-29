@@ -1,7 +1,7 @@
 plugins {
 	id 'java'
 	id 'application'
-
+	id "org.sonarqube" version "3.3"
 	id 'org.springframework.boot' version '2.5.5'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
@@ -14,6 +14,7 @@ version = '0.0.1-SNAPSHOT'
 
 repositories {
 	mavenCentral()
+
 }
 application {
 	if (GradleVersion.current() >= GradleVersion.version('6.7')) {
@@ -42,7 +43,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 
 	runtimeOnly("mysql:mysql-connector-java")
-	runtimeOnly("com.oracle:ojdbc7:12.1.0.2.0")
+	//runtimeOnly("com.oracle:ojdbc7:12.1.0.2.0")
 	//Native stuf
 	implementation project(':jni-library')
 

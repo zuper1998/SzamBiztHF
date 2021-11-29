@@ -96,9 +96,15 @@ JNIEXPORT jobjectArray JNICALL Java_com_narcano_jni_CaffParser_CallParser
     jniPosRec = NULL;
 
     LoadJniPosRec(env);
-
-    CAFF caff = CAFFparser::parser(fileN);
-
+    CAFF caff;
+    try{
+        caff = CAFFparser::parser(fileN);
+    } catch (...){
+        caff = CAFF();
+        CIFF c{-1,-1,"",std::vector<std::string>(),std::vector<RGBpixel>()};
+        caff.addAnim(CaffAnim{3,-1,c});
+        
+    }
     jobjectArray jarr = env->NewObjectArray(caff.blocks.size(), jniPosRec->cls, NULL);
     for(int i=0;i<caff.blocks.size();i++){
         //printf("yeetus\n");
