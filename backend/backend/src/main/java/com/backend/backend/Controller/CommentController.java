@@ -2,6 +2,8 @@ package com.backend.backend.Controller;
 
 import com.backend.backend.Communication.Request.AddCommentRequest;
 import com.backend.backend.Communication.Request.UpdateCommentRequest;
+import com.backend.backend.Communication.Response.GetAllCaffResponse;
+import com.backend.backend.Communication.Response.GetCommentResponse;
 import com.backend.backend.Data.Caff;
 import com.backend.backend.Data.Comment;
 import com.backend.backend.Data.Log;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -49,6 +53,22 @@ public class CommentController {
         commentRepository.save(new Comment(addCommentRequest.getText(), caff.get(), user.get()));
         logRepository.save(new Log("User with name: " + user.get().getUsername() + " commented on Caff with id: " + id + " with text: " + addCommentRequest.getText(), java.time.LocalDateTime.now().toString()));
         return  ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{id}/getComments")
+    @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_USER')")
+    public ResponseEntity<List<GetCommentResponse>> getCaffComments(@PathVariable UUID id) {
+        Optional<Caff> caff = caffRepository.findById(id);
+        List<GetCommentResponse> result = new ArrayList<>();
+        if(caff.isEmpty() || !caff.isPresent()) {
+            logRepository.save(new Log("User: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() + " gave wrong caff id" + id,java.time.LocalDateTime.now().toString()));
+            return ResponseEntity.badRequest().build();
+        } else {
+            for (Comment comment: caff.get().getComments()) {
+                result.add(new GetCommentResponse(comment.getId(),comment.getText(),comment.getUser().getUsername()));
+            }
+        }
+       return ResponseEntity.ok(result);
     }
 
     @PutMapping("/{id}")
