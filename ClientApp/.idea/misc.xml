@@ -3,7 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Gyulus/Documents/SzamBiztHF/ClientApp/app/SzambiztHfApplibrary/src/main/res/layout/caff_row.xml" value="0.13949275362318841" />
+        <entry key="..\:/Users/Gyulus/Documents/SzamBiztHF/ClientApp/app/SzambiztHfApplibrary/src/main/res/layout/comment_row.xml" value="0.33967391304347827" />
+        <entry key="..\:/Users/Gyulus/Documents/SzamBiztHF/ClientApp/app/SzambiztHfApplibrary/src/main/res/layout/fragment_home.xml" value="0.13949275362318841" />
+        <entry key="..\:/Users/Gyulus/Documents/SzamBiztHF/ClientApp/app/SzambiztHfApplibrary/src/main/res/layout/fragment_upload.xml" value="0.3446557971014493" />
+        <entry key="..\:/Users/Gyulus/Documents/SzamBiztHF/ClientApp/app/caffadminapp/src/main/res/drawable-v24/ic_baseline_upload_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/Gyulus/Documents/SzamBiztHF/ClientApp/app/caffadminapp/src/main/res/layout/fragment_caff_admin_details.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Gyulus/Documents/SzamBiztHF/ClientApp/app/caffadminapp/src/main/res/layout/fragment_home.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Gyulus/Documents/SzamBiztHF/ClientApp/app/caffadminapp/src/main/res/layout/fragment_log.xml" value="0.20572916666666666" />
+        <entry key="..\:/Users/Gyulus/Documents/SzamBiztHF/ClientApp/app/caffadminapp/src/main/res/layout/fragment_upload.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Gyulus/Documents/SzamBiztHF/ClientApp/app/caffadminapp/src/main/res/layout/fragment_user_management.xml" value="0.1" />
+        <entry key="..\:/Users/Gyulus/Documents/SzamBiztHF/ClientApp/app/caffadminapp/src/main/res/menu/main_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Gyulus/Documents/SzamBiztHF/ClientApp/app/src/main/res/drawable/ic_baseline_upload_24.xml" value="0.10462962962962963" />
         <entry key="..\:/Users/Gyulus/Documents/SzamBiztHF/ClientApp/app/src/main/res/layout/activity_login.xml" value="0.10507246376811594" />
         <entry key="..\:/Users/Gyulus/Documents/SzamBiztHF/ClientApp/app/src/main/res/layout/activity_main_menu.xml" value="0.20520833333333333" />

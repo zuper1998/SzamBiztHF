@@ -1,8 +1,10 @@
 package com.e.caffadminapp.model
 
 import com.e.szambizthfapplibrary.model.User
+import com.e.szambizthfapplibrary.network.Response.GetAllCaffResponse
 import com.e.szambizthfapplibrary.network.Response.LoginResponse
 import java.util.*
+import kotlin.collections.ArrayList
 
 class AdminData {
     companion object{
@@ -13,6 +15,10 @@ class AdminData {
         private lateinit var userName: String
 
         private lateinit var token: String
+
+        private var caffsCache: ArrayList<GetAllCaffResponse> = ArrayList()
+
+        private lateinit var selectedCaff: GetAllCaffResponse
 
         private var editedUser: User ?= null
 
@@ -26,6 +32,22 @@ class AdminData {
 
         fun getEmail(): String {
             return email
+        }
+
+        fun setSelectedCaff(caff: GetAllCaffResponse) {
+            selectedCaff = caff
+        }
+
+        fun getSelectedCaff(): GetAllCaffResponse {
+            return selectedCaff
+        }
+
+        fun setCaffCache(caff: ArrayList<GetAllCaffResponse>) {
+            caffsCache = caff
+        }
+
+        fun getCaffCache(): ArrayList<GetAllCaffResponse> {
+            return caffsCache
         }
 
         fun getUserName(): String {

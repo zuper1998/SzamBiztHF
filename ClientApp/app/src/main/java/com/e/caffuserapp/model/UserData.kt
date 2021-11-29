@@ -1,8 +1,9 @@
 package com.e.caffuserapp.model
 
-import com.e.caffuserapp.Netwrok.Response.GetAllCaffResponse
+import com.e.szambizthfapplibrary.network.Response.GetAllCaffResponse
 import com.e.szambizthfapplibrary.network.Response.LoginResponse
 import java.util.*
+import kotlin.collections.ArrayList
 
 class UserData {
     companion object {
@@ -15,6 +16,8 @@ class UserData {
         private lateinit var token: String
 
         private lateinit var selectedCaff: GetAllCaffResponse
+
+        private var caffsCache: ArrayList<GetAllCaffResponse> = ArrayList()
 
         fun getId(): UUID {
             return id
@@ -34,6 +37,14 @@ class UserData {
 
         fun getSelectedCaff(): GetAllCaffResponse {
             return selectedCaff
+        }
+
+        fun setCaffCache(caff: ArrayList<GetAllCaffResponse>) {
+            caffsCache = caff
+        }
+
+        fun getCaffCache(): ArrayList<GetAllCaffResponse> {
+            return caffsCache
         }
 
         fun getUserName(): String {

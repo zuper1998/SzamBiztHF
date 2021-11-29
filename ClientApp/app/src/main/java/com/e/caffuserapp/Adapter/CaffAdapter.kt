@@ -1,25 +1,18 @@
 package com.e.caffuserapp.Adapter
 
-import android.R.attr
 import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.e.caffuserapp.Netwrok.Response.GetAllCaffResponse
+import com.e.szambizthfapplibrary.network.Response.GetAllCaffResponse
 import com.e.caffuserapp.R
-import com.e.caffuserapp.databinding.CaffRowBinding
 import com.e.caffuserapp.model.UserData
-import java.io.ByteArrayOutputStream
 import java.util.*
 import kotlin.collections.ArrayList
-import android.R.attr.bitmap
-import android.content.res.Resources
 import android.graphics.Color.rgb
 
-import android.graphics.drawable.BitmapDrawable
-
-import android.graphics.drawable.Drawable
+import com.e.szambizthfapplibrary.databinding.CaffRowBinding
 
 
 class CaffAdapter(private var caffs:ArrayList<GetAllCaffResponse>): RecyclerView.Adapter<CaffAdapter.ViewHolder>() {
@@ -32,14 +25,14 @@ class CaffAdapter(private var caffs:ArrayList<GetAllCaffResponse>): RecyclerView
             binding.tvCaffTitle.text = caff.title
 
             if(caff.caff != null){
-                val h = caff.caff.ciffs?.get(1)?.height
-                val w = caff.caff.ciffs?.get(1)?.width
+                val h = caff.caff!!.ciffs?.get(1)?.height
+                val w = caff.caff!!.ciffs?.get(1)?.width
                 if(w != null && h != null){
                     var colorInt: IntArray = IntArray(w * h)
                     var j = 0
-                    for(i in 0 until caff.caff.ciffs?.get(0)?.rgb_values?.size!! step 3){
+                    for(i in 0 until caff.caff!!.ciffs?.get(0)?.rgb_values?.size!! step 3){
                         //caff.caff.ciffs?.get(0)?.rgb_values!![i]/255
-                        colorInt[j] = rgb(caff.caff.ciffs?.get(0)?.rgb_values!![i], caff.caff.ciffs?.get(0)?.rgb_values!![i + 1], caff.caff.ciffs?.get(0)?.rgb_values!![i + 2])
+                        colorInt[j] = rgb(caff.caff!!.ciffs?.get(0)?.rgb_values!![i], caff.caff!!.ciffs?.get(0)?.rgb_values!![i + 1], caff.caff!!.ciffs?.get(0)?.rgb_values!![i + 2])
                         j++
                     }
                     val bitmap = Bitmap.createBitmap(colorInt, w, h, Bitmap.Config.ARGB_8888)

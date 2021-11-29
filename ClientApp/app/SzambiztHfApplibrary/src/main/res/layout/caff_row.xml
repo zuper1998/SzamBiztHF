@@ -33,7 +33,7 @@
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCaffTitle"
-        android:src="@drawable/placeholder_300x202"/>
+        android:src="@drawable/placeholder"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
 </layout>

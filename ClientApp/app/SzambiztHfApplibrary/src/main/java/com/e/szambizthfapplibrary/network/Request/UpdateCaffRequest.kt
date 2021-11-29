@@ -1,6 +1,5 @@
-package com.e.caffuserapp.Netwrok.Request
+package com.e.szambizthfapplibrary.network.Request
 
-import com.e.caffuserapp.Netwrok.Response.GetCommentResponse
 import org.w3c.dom.Comment
 
 class UpdateCaffRequest {

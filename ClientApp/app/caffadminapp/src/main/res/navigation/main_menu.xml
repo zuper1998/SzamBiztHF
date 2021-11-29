@@ -30,4 +30,12 @@
         android:id="@+id/AccountFragment"
         android:name="com.e.caffadminapp.Controller.Fragments.AccountFragment"
         android:label="AccountFragment" />
+    <fragment
+        android:id="@+id/CaffAdminDetailsFragment"
+        android:name="com.e.caffadminapp.Controller.Fragments.CaffAdminDetailsFragment"
+        android:label="CaffAdminDetailsFragment" />
+    <fragment
+        android:id="@+id/UploadFragment"
+        android:name="com.e.caffadminapp.Controller.Fragments.UploadFragment"
+        android:label="fragment_upload" />
 </navigation>

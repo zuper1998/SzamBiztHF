@@ -1,4 +1,4 @@
-package com.e.caffuserapp.Netwrok.Response
+package com.e.szambizthfapplibrary.network.Response
 
 import java.util.*
 

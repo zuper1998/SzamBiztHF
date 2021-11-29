@@ -2,11 +2,9 @@ package com.e.caffuserapp.Adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.e.caffuserapp.Netwrok.Response.GetCommentResponse
-import com.e.caffuserapp.databinding.CommentRowBinding
-import com.e.szambizthfapplibrary.model.User
+import com.e.szambizthfapplibrary.databinding.CommentRowBinding
+import com.e.szambizthfapplibrary.network.Response.GetCommentResponse
 import java.util.*
 import kotlin.collections.ArrayList
 

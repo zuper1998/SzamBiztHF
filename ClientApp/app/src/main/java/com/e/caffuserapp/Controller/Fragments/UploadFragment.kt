@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.e.caffuserapp.R
 import android.widget.Toast
 
 import android.app.Activity
@@ -20,17 +19,11 @@ import androidx.core.app.ActivityCompat
 
 import android.os.Build
 import android.util.Log
-import android.widget.Button
 
-import android.widget.EditText
-import com.e.caffuserapp.Controller.MainMenuActivity
 import com.e.caffuserapp.Netwrok.Service.CaffService
-import com.e.caffuserapp.Netwrok.Service.UserService
-import com.e.caffuserapp.Utils.FileUtils
-import com.e.caffuserapp.databinding.FragmentUploadBinding
+import com.e.szambizthfapplibrary.Utils.FileUtils
 import com.e.caffuserapp.model.UserData
-import com.e.szambizthfapplibrary.network.Request.LoginRequest
-import com.e.szambizthfapplibrary.network.Response.LoginResponse
+import com.e.szambizthfapplibrary.databinding.FragmentUploadBinding
 import com.e.szambizthfapplibrary.network.RetrofitClient
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -93,7 +86,7 @@ class UploadFragment : Fragment() {
         doBrowseFile()
     }
 
-    private fun askPermission(f: String?) {
+    private fun askPermission(f: String?, t: String) {
         // With Android Level >= 23, you have to ask the user
         // for permission to access External Storage.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { // Level 23
@@ -112,7 +105,7 @@ class UploadFragment : Fragment() {
                 return
             }
         }
-        upload(f)
+        upload(f, t)
     }
 
     private fun doBrowseFile() {
@@ -168,8 +161,8 @@ class UploadFragment : Fragment() {
                             Log.e(LOG_TAG, "Error: $e")
                             Toast.makeText(this.context, "Error: $e", Toast.LENGTH_SHORT).show()
                         }
-                        binding.etPath.setText(filePath)
-                        askPermission(filePath)
+
+                        askPermission(filePath, binding.etPath.text.toString())
 
                     }
                 }
@@ -182,14 +175,20 @@ class UploadFragment : Fragment() {
         return binding.etPath.text.toString()
     }
 
-    private fun upload(filePath: String?) {
+    private fun upload(filePath: String?, title: String) {
 
         if(filePath == null) return
         retrofit = RetrofitClient.getInstance()
         val f = File(filePath)
         //f.readBytes()
         val fileP1 = MultipartBody.Part.createFormData("caffFile", f.name, RequestBody.create(MediaType.parse("multipart/form-data"), f))
-        val fileP2 = RequestBody.create(MediaType.parse("multipart/form-data"), "Sajt")
+        val fileP2: RequestBody
+        if(title.isEmpty()){
+            fileP2 = RequestBody.create(MediaType.parse("multipart/form-data"), "Blank")
+        }
+        else{
+            fileP2 = RequestBody.create(MediaType.parse("multipart/form-data"), title)
+        }
         val call = retrofit.create(CaffService::class.java).addCaff(fileP1, fileP2, "Bearer " + UserData.getToken())
 
         call.enqueue(object:Callback<Void>{

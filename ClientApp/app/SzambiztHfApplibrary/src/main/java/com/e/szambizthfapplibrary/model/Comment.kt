@@ -1,8 +1,6 @@
-package com.e.caffuserapp.model
+package com.e.szambizthfapplibrary.model
 
-import com.e.szambizthfapplibrary.model.User
 import java.util.*
-
 
 class Comment {
 

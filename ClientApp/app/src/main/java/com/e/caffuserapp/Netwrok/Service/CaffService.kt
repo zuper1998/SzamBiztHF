@@ -1,7 +1,7 @@
 package com.e.caffuserapp.Netwrok.Service
 
-import com.e.caffuserapp.Netwrok.Request.UpdateCaffRequest
-import com.e.caffuserapp.Netwrok.Response.GetAllCaffResponse
+import com.e.szambizthfapplibrary.network.Request.UpdateCaffRequest
+import com.e.szambizthfapplibrary.network.Response.GetAllCaffResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call

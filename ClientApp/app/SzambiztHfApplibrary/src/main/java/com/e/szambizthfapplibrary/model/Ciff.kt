@@ -1,4 +1,4 @@
-package com.e.caffuserapp.model
+package com.e.szambizthfapplibrary.model
 
 class Ciff {
 
