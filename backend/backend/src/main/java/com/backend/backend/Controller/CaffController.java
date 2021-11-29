@@ -130,7 +130,7 @@ public class CaffController {
         List<GetAllCaffResponse> responses = new ArrayList<>();
         for(int i=0; i<caffs.size(); i++) {
             CIFF[] ciffs = new CaffParser().CallParser(caffs.get(i).getCaffFile());
-            GetAllCaffResponse caffResponse = new GetAllCaffResponse(caffs.get(i).getId(), ciffs, caffs.get(i).getUser().getUsername(), new ArrayList<>());
+            GetAllCaffResponse caffResponse = new GetAllCaffResponse(caffs.get(i).getId(), ciffs, caffs.get(i).getUser().getUsername(), new ArrayList<>(), caffs.get(i).getTitle());
             for(int j=0; j<caffs.get(i).getComments().size(); j++) {
                 caffResponse.getComments().add(new GetCommentResponse(caffs.get(i).getComments().get(j).getId(), caffs.get(i).getComments().get(j).getText(), caffs.get(i).getComments().get(j).getUser().getUsername()));
             }

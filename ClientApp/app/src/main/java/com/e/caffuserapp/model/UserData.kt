@@ -1,5 +1,6 @@
 package com.e.caffuserapp.model
 
+import com.e.caffuserapp.Netwrok.Response.GetAllCaffResponse
 import com.e.szambizthfapplibrary.network.Response.LoginResponse
 import java.util.*
 
@@ -13,6 +14,8 @@ class UserData {
 
         private lateinit var token: String
 
+        private lateinit var selectedCaff: GetAllCaffResponse
+
         fun getId(): UUID {
             return id
         }
@@ -23,6 +26,14 @@ class UserData {
 
         fun getEmail(): String {
             return email
+        }
+
+        fun setSelectedCaff(caff: GetAllCaffResponse) {
+            selectedCaff = caff
+        }
+
+        fun getSelectedCaff(): GetAllCaffResponse {
+            return selectedCaff
         }
 
         fun getUserName(): String {

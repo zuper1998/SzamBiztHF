@@ -67,7 +67,7 @@ jobject FillJNIOjbectValues(JNIEnv * env, CIFF c,CaffAnim ca) {
           break;
 
       }
-       printf("%d\n",tmp);
+       //printf("%d\n",tmp);
       temparr[i] = tmp;
     }
     env->SetIntArrayRegion(iarr, 0, tlen, temparr);
@@ -91,7 +91,7 @@ jobject FillJNIOjbectValues(JNIEnv * env, CIFF c,CaffAnim ca) {
 //This is called from java
 JNIEXPORT jobjectArray JNICALL Java_com_narcano_jni_CaffParser_CallParser
   (JNIEnv *env, jobject thisObject, jstring filename){
-  printf("yeetus\n");
+  //printf("yeetus\n");
     const char* fileN = env->GetStringUTFChars(filename, NULL);
     jniPosRec = NULL;
 
@@ -101,7 +101,7 @@ JNIEXPORT jobjectArray JNICALL Java_com_narcano_jni_CaffParser_CallParser
 
     jobjectArray jarr = env->NewObjectArray(caff.blocks.size(), jniPosRec->cls, NULL);
     for(int i=0;i<caff.blocks.size();i++){
-        printf("yeetus\n");
+        //printf("yeetus\n");
       //jobject JO = env->NewObject(jniPosRec->cls, jniPosRec->constructortorID); we are calling the ctor in the next function
       jobject JO = FillJNIOjbectValues(env,caff.blocks[i].ciff,caff.blocks[i]);
       env->SetObjectArrayElement(jarr, i, JO);

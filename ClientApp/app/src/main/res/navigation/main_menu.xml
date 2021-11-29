@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_menu"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_menu"
     app:startDestination="@id/HomeFragment">
 
     <fragment
@@ -11,4 +13,14 @@
         android:id="@+id/AccountFragment"
         android:name="com.e.caffuserapp.Controller.Fragments.AccountFragment"
         android:label="AccountFragment" />
+    <fragment
+        android:id="@+id/UploadFragment"
+        android:name="com.e.caffuserapp.Controller.Fragments.UploadFragment"
+        android:label="fragment_upload"
+        tools:layout="@layout/fragment_upload" />
+    <fragment
+        android:id="@+id/CaffDetailsFragment"
+        android:name="com.e.caffuserapp.Controller.Fragments.CaffDetailsFragment"
+        android:label="fragment_caff_details"
+        tools:layout="@layout/fragment_caff_details" />
 </navigation>

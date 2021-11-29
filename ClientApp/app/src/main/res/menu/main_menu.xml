@@ -9,4 +9,10 @@
         android:id="@+id/AccountFragment"
         android:title="account"
         android:icon="@drawable/ic_baseline_person_24"/>
+
+    <item
+        android:id="@+id/UploadFragment"
+        android:title="upload"
+        android:icon="@drawable/ic_baseline_upload_24"/>
+
 </menu>

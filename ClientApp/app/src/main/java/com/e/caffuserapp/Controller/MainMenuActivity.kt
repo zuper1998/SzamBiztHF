@@ -33,6 +33,7 @@ class MainMenuActivity : AppCompatActivity() {
             text.text = when (destination.id) {
                 R.id.HomeFragment -> "Welcome back"
                 R.id.AccountFragment -> "Manage account"
+                R.id.UploadFragment -> "Upload File"
                 else -> ""
             }
         }

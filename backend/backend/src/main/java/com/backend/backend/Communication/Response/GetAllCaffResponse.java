@@ -18,6 +18,8 @@ public class GetAllCaffResponse {
 
     List<GetCommentResponse> comments;
 
+    private String title;
+
     public CaffDTO getCaff() {
         return caff;
     }
@@ -42,7 +44,7 @@ public class GetAllCaffResponse {
         return id;
     }
 
-    public GetAllCaffResponse(UUID id, CIFF[] ciffs, String username, List<GetCommentResponse> getCommentResponses) {
+    public GetAllCaffResponse(UUID id, CIFF[] ciffs, String username, List<GetCommentResponse> getCommentResponses, String title) {
         ArrayList<Ciff> ciff = new ArrayList<>();
         for(int i=0; i<ciffs.length; i++) {
             ciff.add(new Ciff(ciffs[i].width, ciffs[i].height, ciffs[i].duration,ciffs[i].rgb_values));
@@ -51,5 +53,14 @@ public class GetAllCaffResponse {
         this.id = id;
         this.username = username;
         this.comments = getCommentResponses;
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

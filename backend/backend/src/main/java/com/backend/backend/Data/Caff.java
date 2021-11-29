@@ -20,7 +20,6 @@ public class Caff {
     private UUID id;
 
     @NotBlank
-    @Column(unique=true)
     @Size(max = 50)
     private String title;
 
