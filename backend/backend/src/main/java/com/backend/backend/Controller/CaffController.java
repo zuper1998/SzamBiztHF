@@ -130,11 +130,22 @@ public class CaffController {
         List<GetAllCaffResponse> responses = new ArrayList<>();
         for(int i=0; i<caffs.size(); i++) {
             CIFF[] ciffs = new CaffParser().CallParser(caffs.get(i).getCaffFile());
-            GetAllCaffResponse caffResponse = new GetAllCaffResponse(caffs.get(i).getId(), ciffs, caffs.get(i).getUser().getUsername(), new ArrayList<>(), caffs.get(i).getTitle());
-            for(int j=0; j<caffs.get(i).getComments().size(); j++) {
-                caffResponse.getComments().add(new GetCommentResponse(caffs.get(i).getComments().get(j).getId(), caffs.get(i).getComments().get(j).getText(), caffs.get(i).getComments().get(j).getUser().getUsername()));
+            if(ciffs[0].duration == -1) {
+                lr.save(new Log("Caff file does not exists with id: " + caffs.get(i), java.time.LocalDateTime.now().toString()));
+                cr.delete(caffs.get(i));
             }
-            responses.add(caffResponse);
+            else if(ciffs[0].duration == -2) {
+                lr.save(new Log("Caff is not well formatted with id: " + caffs.get(i) + " uploaded by: " + caffs.get(i).getUser().getUsername(), java.time.LocalDateTime.now().toString()));
+                File file = new File(caffs.get(i).getCaffFile());
+                file.delete();
+                cr.delete(caffs.get(i));
+            } else {
+                GetAllCaffResponse caffResponse = new GetAllCaffResponse(caffs.get(i).getId(), ciffs, caffs.get(i).getUser().getUsername(), new ArrayList<>(), caffs.get(i).getTitle());
+                for (int j = 0; j < caffs.get(i).getComments().size(); j++) {
+                    caffResponse.getComments().add(new GetCommentResponse(caffs.get(i).getComments().get(j).getId(), caffs.get(i).getComments().get(j).getText(), caffs.get(i).getComments().get(j).getUser().getUsername()));
+                }
+                responses.add(caffResponse);
+            }
         }
         return responses;
     }
