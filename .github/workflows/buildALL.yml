@@ -21,7 +21,7 @@ jobs:
         with:
           build-root-directory: ./backend/backend/
           gradle-version: 7.3
-          arguments: runOnGitHub
+          arguments: build
           wrapper-cache-enabled: true
           dependencies-cache-enabled: true
           configuration-cache-enabled: true
