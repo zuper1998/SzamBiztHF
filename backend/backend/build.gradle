@@ -43,7 +43,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 
 	runtimeOnly("mysql:mysql-connector-java")
-	//runtimeOnly("com.oracle:ojdbc7:12.1.0.2.0")
+	runtimeOnly("com.oracle:ojdbc7:12.1.0.2.0")
 	//Native stuf
 	implementation project(':jni-library')
 
