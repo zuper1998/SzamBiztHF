@@ -58,17 +58,9 @@ test {
 }
 sonarqube {
 	properties {
-		property "sonar.projectKey", "zuper1998_SzamBiztHF"
+		//property "sonar.projectKey", "zuper1998_SzamBiztHF"
+	    	property "sonar.projectKey", "zuper1998_SzamBiztHF_1"
 		property "sonar.organization", "zuper1998"
 		property "sonar.host.url", "https://sonarcloud.io"
 	}
 }
-
-sonarqube2 {
-  properties {
-    property "sonar.projectKey", "zuper1998_SzamBiztHF_1"
-    property "sonar.organization", "zuper1998"
-    property "sonar.host.url", "https://sonarcloud.io"
-  }
-}
-
