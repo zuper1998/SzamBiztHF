@@ -4,8 +4,6 @@ import org.w3c.dom.Comment
 
 class UpdateCaffRequest {
 
-    val username: String? = null
-
-    var comments: List<Comment>? = null
+    var title: String? = null
 
 }

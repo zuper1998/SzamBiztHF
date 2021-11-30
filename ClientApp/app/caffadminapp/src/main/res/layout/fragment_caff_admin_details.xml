@@ -5,16 +5,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
         android:padding="20dp"
         tools:context=".Controller.Fragments.CaffDetailsFragment">
 
-        <TextView
-            android:id="@+id/tvCaffDetailsTitle"
+        <EditText
+            android:id="@+id/etCaffDetailsTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Title"
+            android:layout_marginEnd="20dp"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ivDownloadCaff"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,7 +29,7 @@
             android:src="@drawable/placeholder"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCaffDetailsTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/etCaffDetailsTitle" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipetorefreshDetails"
@@ -67,5 +70,23 @@
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivCaffDetails" />
+
+        <ImageView
+            android:id="@+id/ivEditTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_menu_book_24" />
+
+        <ImageView
+            android:id="@+id/ivDownloadCaff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/ivEditTitle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_upload_24" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

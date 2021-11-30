@@ -12,7 +12,7 @@ class GetAllCaffResponse {
 
     val username: String? = null
 
-    val title: String? = null
+    var title: String? = null
 
     lateinit var comments: List<GetCommentResponse>
 

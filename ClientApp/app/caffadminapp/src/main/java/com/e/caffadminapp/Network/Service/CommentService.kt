@@ -1,5 +1,6 @@
 package com.e.caffadminapp.Network.Service
 
+import com.e.caffadminapp.Network.Request.UpdateCommentRequest
 import com.e.szambizthfapplibrary.network.Response.GetCommentResponse
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -16,5 +17,8 @@ interface CommentService {
 
     @DELETE("/api/comment/{id}")
     fun deleteComment(@Header("Authorization") token: String, @Path("id") id: UUID): Call<Void>
+
+    @PUT("/api/comment/{id}")
+    fun updateComment(@Body updateCommentRequest: UpdateCommentRequest, @Header("Authorization") token: String, @Path("id") id: UUID): Call<Void>
 
 }

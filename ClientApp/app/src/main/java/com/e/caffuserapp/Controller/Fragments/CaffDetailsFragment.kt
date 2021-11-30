@@ -1,14 +1,21 @@
 package com.e.caffuserapp.Controller.Fragments
 
+import android.content.ContentValues
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.e.caffuserapp.Adapter.CommentAdapter
+import com.e.caffuserapp.Netwrok.Service.CaffService
 import com.e.szambizthfapplibrary.network.Response.GetAllCaffResponse
 import com.e.caffuserapp.Netwrok.Service.CommentService
 import com.e.caffuserapp.databinding.FragmentCaffDetailsBinding
@@ -18,10 +25,13 @@ import com.e.szambizthfapplibrary.network.RetrofitClient
 import com.google.gson.JsonObject
 import okhttp3.MediaType
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import java.io.IOException
+import java.io.InputStream
 
 
 class CaffDetailsFragment : Fragment() {
@@ -97,6 +107,9 @@ class CaffDetailsFragment : Fragment() {
             binding.swipetorefreshDetails.isRefreshing = false
         }
 
+        binding.ivDownloadCaffUser.setOnClickListener {
+            downloadCaff()
+        }
 
         binding.tvCaffDetailsTitle.text = selectedCaff.title
         binding.ivCaffDetails.setOnClickListener {
@@ -160,6 +173,63 @@ class CaffDetailsFragment : Fragment() {
                 Toast.makeText(binding.root.context, t.message, Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun downloadCaff(){
+        retrofit = RetrofitClient.getFileInstance()
+        val call = retrofit.create(CaffService::class.java).downloadCaff("Bearer " + UserData.getToken(), selectedCaff.id!!)
+
+        call.enqueue(object: Callback<ResponseBody> {
+            @RequiresApi(Build.VERSION_CODES.Q)
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                println("norip")
+
+                val name = response.headers().get("Content-Disposition")?.substringAfter('\"')?.removeSuffix("\"")
+                //println(response.body()?.string())
+                saveFileToExternalStorage(name!!, response.body()!!.byteStream())
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                println("rip")
+                println(t.stackTraceToString())
+            }
+        })
+    }
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    fun saveFileToExternalStorage(name: String, body: InputStream): Uri {
+
+
+
+        val values = ContentValues().apply {
+            put(MediaStore.MediaColumns.DISPLAY_NAME, name)
+            put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
+        }
+
+        val resolver = context?.contentResolver
+        var uri: Uri? = null
+
+        try {
+            uri = resolver?.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, values)
+                ?: throw IOException("Failed to create new MediaStore record.")
+
+            //FileOutputStream().use { stream -> stream.write(bytes) }
+
+            resolver.openOutputStream(uri)?.use {
+                it.write(body.readBytes())
+            } ?: throw IOException("Failed to open output stream.")
+
+            return uri
+
+        } catch (e: IOException) {
+
+            uri?.let { orphanUri ->
+                // Don't leave an orphan entry in the MediaStore
+                resolver?.delete(orphanUri, null, null)
+            }
+
+            throw e
+        }
     }
 
 }

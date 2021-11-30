@@ -11,8 +11,12 @@ import com.backend.backend.Repository.CaffRepository;
 import com.backend.backend.Repository.LogRepository;
 import com.backend.backend.Repository.UserRepository;
 import com.backend.backend.Security.UserDetailsImpl;
+import jdk.jfr.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +27,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -70,9 +76,10 @@ public class CaffController {
         return  ResponseEntity.ok(responses);
     }
 
+
     @GetMapping("/downloadCaff/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_USER')")
-    public ResponseEntity<File> downloadCaff(@PathVariable UUID id) {
+    public ResponseEntity<Resource> downloadCaff(@PathVariable UUID id) throws MalformedURLException {
         Optional<Caff> caff = cr.findById(id);
         if(caff.isEmpty()) {
             lr.save(new Log("User: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() + " gave wrong id to download" + id,java.time.LocalDateTime.now().toString()));
@@ -81,10 +88,12 @@ public class CaffController {
         else {
             lr.save(new Log("User: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() + " downloaded Caff wit id" + id,java.time.LocalDateTime.now().toString()));
             String path = caff.get().getCaffFile();
+            Path path1 = Path.of(path);
             File file = new File(path);
+            Resource res = new UrlResource(path1.toUri());
 
             return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
-                    "attachment; filename=\"" + file.getName() + "\"").body(file);
+                    "attachment; filename=\"" + file.getName() + "\"").contentType(MediaType.APPLICATION_OCTET_STREAM).body(res);
         }
     }
 

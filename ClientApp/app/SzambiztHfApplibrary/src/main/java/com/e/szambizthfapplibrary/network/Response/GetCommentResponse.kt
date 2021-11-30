@@ -4,10 +4,10 @@ import java.util.*
 
 class GetCommentResponse {
 
-    val id: UUID? = null
+    var id: UUID? = null
 
-    val text: String? = null
+    var text: String? = null
 
-    val username: String? = null
+    var username: String? = null
 
 }
