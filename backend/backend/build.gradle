@@ -52,11 +52,11 @@ dependencies {
 }
 
 
-
+/*
 test {
 	useJUnitPlatform()
 	systemProperty "java.library.path", file("${buildDir}/libs/com_narcano_jni_CaffParser/shared").absolutePath
-}
+}*/
 sonarqube {
 	properties {
 		property "sonar.projectKey", "zuper1998_SzamBiztHF"
