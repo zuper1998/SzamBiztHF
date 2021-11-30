@@ -43,8 +43,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 
 	runtimeOnly("mysql:mysql-connector-java")
-	implementation files('libs/ojdbc7.jar')
-	//runtimeOnly("com.oracle:ojdbc7")
+	//implementation files('libs/ojdbc7.jar')
+	runtimeOnly("com.oracle:ojdbc7")
 	//Native stuf
 	implementation project(':jni-library')
 
@@ -52,11 +52,11 @@ dependencies {
 }
 
 
-/*
+
 test {
 	useJUnitPlatform()
 	systemProperty "java.library.path", file("${buildDir}/libs/com_narcano_jni_CaffParser/shared").absolutePath
-}*/
+}
 sonarqube {
 	properties {
 		property "sonar.projectKey", "zuper1998_SzamBiztHF"
