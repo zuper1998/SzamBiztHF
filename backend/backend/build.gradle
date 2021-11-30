@@ -14,7 +14,6 @@ version = '0.0.1-SNAPSHOT'
 
 repositories {
 	mavenCentral()
-
 }
 application {
 	if (GradleVersion.current() >= GradleVersion.version('6.7')) {
@@ -44,7 +43,7 @@ dependencies {
 
 	runtimeOnly("mysql:mysql-connector-java")
 	//implementation files('libs/ojdbc7.jar')
-	runtimeOnly("com.oracle:ojdbc7")
+	runtimeOnly("com.oracle.database.jdbc:ojdbc10:19.7.0.0")
 	//Native stuf
 	implementation project(':jni-library')
 
