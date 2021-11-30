@@ -39,7 +39,7 @@ public class BackendApplication implements CommandLineRunner {
 			Set<Role> roles = new HashSet<>();
 			Optional<Role> adminRole = roleRepository.findByName(RoleEnum.ROLE_ADMIN);
 			User admin = new User("admin", "admin@mail.com", encoder.encode("admin"), new ArrayList<Caff>(), new ArrayList<Comment>());
-			roles.add(adminRole.get());
+			adminRole.ifPresent(roles::add);
 			admin.setRoles(roles);
 			userRepository.save(admin);
 		}

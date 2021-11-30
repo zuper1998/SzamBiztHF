@@ -12,6 +12,7 @@ import com.backend.backend.Repository.LogRepository;
 import com.backend.backend.Repository.UserRepository;
 import com.backend.backend.Security.UserDetailsImpl;
 import jdk.jfr.ContentType;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -55,15 +56,21 @@ public class CaffController {
         Optional<User> user = ur.findByUsername( ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
         if(!caffFile.isEmpty()) {
             String root  = System.getProperty("user.dir");
-            String path = root + "/src/main/java/com/backend/backend/CaffFileDirectory/" + caffFile.getOriginalFilename() + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMddHHmmss-")); ;
+            String path = root + "/src/main/java/com/backend/backend/CaffFileDirectory/" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMddHHmmss-")) + RandomString.make() + ".caff";
             File dest = new File(path);
             caffFile.transferTo(dest);
-            cr.save(new Caff(title,path, new ArrayList<>(), user.get()));
-            lr.save(new Log("Added Caff by user: " + user.get().getUsername() + " with title: " + title,java.time.LocalDateTime.now().toString()));
-            return ResponseEntity.ok().build();
+            if(user.isPresent()){
+                cr.save(new Caff(title,path, new ArrayList<>(), user.get()));
+                lr.save(new Log("Added Caff by user: " + user.get().getUsername() + " with title: " + title,java.time.LocalDateTime.now().toString()));
+                return ResponseEntity.ok().build();
+            }
         }
-        lr.save(new Log("Failed to add Caff by user: " + user.get().getUsername() + " with title: " + title + ",due to no file in params",java.time.LocalDateTime.now().toString()));
-        return  ResponseEntity.badRequest().build();
+        if(user.isPresent()){
+            lr.save(new Log("Failed to add Caff by user: " + user.get().getUsername() + " with title: " + title + ",due to no file in params",java.time.LocalDateTime.now().toString()));
+            return  ResponseEntity.badRequest().build();
+        }
+        lr.save(new Log("User (caller) does not exist!", java.time.LocalDateTime.now().toString()));
+        return ResponseEntity.badRequest().build();
     }
 
 
@@ -130,8 +137,13 @@ public class CaffController {
         }
         cr.delete(caff.get());
         File file = new File(caff.get().getCaffFile());
-        file.delete();
-        lr.save(new Log("Deleted Caff with id: " + id + " by admin: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername(), java.time.LocalDateTime.now().toString()));
+        if(file.delete()){
+            lr.save(new Log("Deleted Caff with id: " + id + " by admin: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername(), java.time.LocalDateTime.now().toString()));
+        }
+        else {
+            lr.save(new Log("Deletion of Caff with id: " + id + " by admin: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() + " failed!", java.time.LocalDateTime.now().toString()));
+        }
+
         return ResponseEntity.ok().build();
     }
 
@@ -146,7 +158,12 @@ public class CaffController {
             else if(ciffs[0].duration == -2) {
                 lr.save(new Log("Caff is not well formatted with id: " + caffs.get(i) + " uploaded by: " + caffs.get(i).getUser().getUsername(), java.time.LocalDateTime.now().toString()));
                 File file = new File(caffs.get(i).getCaffFile());
-                file.delete();
+                if(file.delete()){
+                    lr.save(new Log("Deleted Caff with inconsistent value with the DataBase", java.time.LocalDateTime.now().toString()));
+                }
+                else {
+                    lr.save(new Log("Deletion of Caff with inconsistent value with the DataBase failed", java.time.LocalDateTime.now().toString()));
+                }
                 cr.delete(caffs.get(i));
             } else {
                 GetAllCaffResponse caffResponse = new GetAllCaffResponse(caffs.get(i).getId(), ciffs, caffs.get(i).getUser().getUsername(), new ArrayList<>(), caffs.get(i).getTitle());

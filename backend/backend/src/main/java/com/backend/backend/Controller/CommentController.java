@@ -46,12 +46,14 @@ public class CommentController {
     public ResponseEntity<Void> addComment(@Valid @RequestBody @NotNull AddCommentRequest addCommentRequest, @PathVariable UUID id) {
         Optional<User> user = userRepository.findByUsername( ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
         Optional<Caff> caff = caffRepository.findById(id);
-        if(caff.isEmpty() || user.isEmpty()) {
+        if(caff.isEmpty() && user.isPresent()) {
             logRepository.save(new Log("User with name: " + user.get().getUsername() + " failed to comment on Caff with id: " + id + " with text: " + addCommentRequest.getText() + " due to wrong id", java.time.LocalDateTime.now().toString()));
             return ResponseEntity.badRequest().build();
         }
-        commentRepository.save(new Comment(addCommentRequest.getText(), caff.get(), user.get()));
-        logRepository.save(new Log("User with name: " + user.get().getUsername() + " commented on Caff with id: " + id + " with text: " + addCommentRequest.getText(), java.time.LocalDateTime.now().toString()));
+        if(caff.isPresent() && user.isPresent()) {
+            commentRepository.save(new Comment(addCommentRequest.getText(), caff.get(), user.get()));
+            logRepository.save(new Log("User with name: " + user.get().getUsername() + " commented on Caff with id: " + id + " with text: " + addCommentRequest.getText(), java.time.LocalDateTime.now().toString()));
+        }
         return  ResponseEntity.ok().build();
     }
 
@@ -60,7 +62,7 @@ public class CommentController {
     public ResponseEntity<List<GetCommentResponse>> getCaffComments(@PathVariable UUID id) {
         Optional<Caff> caff = caffRepository.findById(id);
         List<GetCommentResponse> result = new ArrayList<>();
-        if(caff.isEmpty() || !caff.isPresent()) {
+        if(caff.isEmpty()) {
             logRepository.save(new Log("User: " + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() + " gave wrong caff id" + id,java.time.LocalDateTime.now().toString()));
             return ResponseEntity.badRequest().build();
         } else {

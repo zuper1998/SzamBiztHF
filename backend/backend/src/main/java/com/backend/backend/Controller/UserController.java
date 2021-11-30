@@ -54,22 +54,35 @@ public class UserController {
         }
         User NewUser = new User(signUpMessage.getUsername(), signUpMessage.getEmail(), encoder.encode(signUpMessage.getPassword()), new ArrayList<>(), new ArrayList<>());
         Optional<Role> userRole = roleRepository.findByName(RoleEnum.ROLE_USER);
-        NewUser.setRoles(Set.of(userRole.get()));
-        ur.save(NewUser);
-        logRepository.save(new Log("Registration for user: " + NewUser.getUsername(), java.time.LocalDateTime.now().toString()));
-        return ResponseEntity.ok().build();
+        if(userRole.isPresent()){
+            NewUser.setRoles(Set.of(userRole.get()));
+            ur.save(NewUser);
+            logRepository.save(new Log("Registration for user: " + NewUser.getUsername(), java.time.LocalDateTime.now().toString()));
+            return ResponseEntity.ok().build();
+        }
+        logRepository.save(new Log("Registration for user: " + NewUser.getUsername() + " failed! UserRole is not present!", java.time.LocalDateTime.now().toString()));
+        return  ResponseEntity.badRequest().build();
+
     }
 
     @PostMapping("/login/admin")
     public ResponseEntity<LoginResponse> loginAdmin(@Valid @RequestBody @NotNull LoginRequest loginRequest) {
         Optional<Role> role = roleRepository.findByName(RoleEnum.ROLE_ADMIN);
-        return login(loginRequest, role.get());
+        if(role.isPresent()){
+            return login(loginRequest, role.get());
+        }
+        logRepository.save(new Log("Login for admin: " + loginRequest.getUsername() + " failed!", java.time.LocalDateTime.now().toString()));
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/login/user")
     public ResponseEntity<LoginResponse> loginUser(@Valid @RequestBody @NotNull LoginRequest loginRequest) {
         Optional<Role> role = roleRepository.findByName(RoleEnum.ROLE_USER);
-        return login(loginRequest, role.get());
+        if(role.isPresent()){
+            return login(loginRequest, role.get());
+        }
+        logRepository.save(new Log("Login for user: " + loginRequest.getUsername() + " failed!", java.time.LocalDateTime.now().toString()));
+        return ResponseEntity.badRequest().build();
     }
 
     public ResponseEntity<LoginResponse> login(LoginRequest loginRequest, Role role) {
@@ -151,12 +164,20 @@ public class UserController {
                             logRepository.save(new Log("Registration for user: " + newUser.getUsername() + " by admin" + ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername(), java.time.LocalDateTime.now().toString()));
                             break;
                     }
+                    if(role.isEmpty()){
+                        logRepository.save(new Log("Adding admin user failed", java.time.LocalDateTime.now().toString()));
+                        return ResponseEntity.badRequest().build();
+                    }
                     roleSet.add(role.get());
                     newUser.getRoles().add(role.get());
                 }
             }
         }
         Optional<Role> userRole = roleRepository.findByName(RoleEnum.ROLE_USER);
+        if(userRole.isEmpty()){
+            logRepository.save(new Log("Adding admin user failed", java.time.LocalDateTime.now().toString()));
+            return ResponseEntity.badRequest().build();
+        }
         newUser.setRoles(Set.of(userRole.get()));
         ur.save(newUser);
         return ResponseEntity.ok().build();

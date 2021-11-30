@@ -92,7 +92,7 @@ public class UserDetailsImpl implements UserDetails {
         return true;
     }
 
-    @Override
+    /*@Override
     public boolean equals(Object o) {
         if (this == o)
             return true;
@@ -100,7 +100,7 @@ public class UserDetailsImpl implements UserDetails {
             return false;
         UserDetailsImpl user = (UserDetailsImpl) o;
         return Objects.equals(id, user.id);
-    }
+    }*/
 
     public boolean hasRole(Role role) {
         List<String> roles = authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
