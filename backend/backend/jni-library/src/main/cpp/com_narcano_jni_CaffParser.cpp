@@ -99,11 +99,19 @@ JNIEXPORT jobjectArray JNICALL Java_com_narcano_jni_CaffParser_CallParser
     CAFF caff;
     try{
         caff = CAFFparser::parser(fileN);
-    } catch (...){
+    } catch (std::invalid_argument& e){
         caff = CAFF();
-        CIFF c{-1,-1,"Error Getting Caff",std::vector<std::string>(),std::vector<RGBpixel>()};
-        caff.addAnim(CaffAnim{3,-1,c});
+        int error_code=-1;
+        CIFF c{error_code,error_code,"Error in the Caff parsing",std::vector<std::string>(),std::vector<RGBpixel>()};
+        caff.addAnim(CaffAnim{3,error_code,c});
+    } catch  (std::length_error& e){
+        int error_code=-2;
+        caff = CAFF();
+        CIFF c{error_code,error_code,"No file found",std::vector<std::string>(),std::vector<RGBpixel>()};
+        caff.addAnim(CaffAnim{3,error_code,c});
     }
+
+
     jobjectArray jarr = env->NewObjectArray(caff.blocks.size(), jniPosRec->cls, NULL);
     for(int i=0;i<caff.blocks.size();i++){
         //printf("yeetus\n");
