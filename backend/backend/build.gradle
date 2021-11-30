@@ -44,7 +44,7 @@ dependencies {
 
 	runtimeOnly("mysql:mysql-connector-java")
 	implementation files('libs/ojdbc7.jar')
-	runtimeOnly("com.oracle:ojdbc7")
+	//runtimeOnly("com.oracle:ojdbc7")
 	//Native stuf
 	implementation project(':jni-library')
 
