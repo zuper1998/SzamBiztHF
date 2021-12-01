@@ -4,14 +4,16 @@ plugins {
 	id 'dev.nokee.cpp-language'
   	id "org.sonarqube"
 }
+
+
+task wrapper(type: Wrapper){
+   gradleVersion = '7.3'
+}
+
 sonarqube {
   properties {
     property "sonar.projectKey", "zuper1998_SzamBiztHF_CPP"
     property "sonar.organization", "zuper1998"
     property "sonar.host.url", "https://sonarcloud.io"
   }
-}
-
-task wrapper(type: Wrapper){
-   gradleVersion = '7.3'
 }
