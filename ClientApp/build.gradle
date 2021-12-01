@@ -1,3 +1,7 @@
+plugins {
+    id "org.sonarqube" version "3.3"
+}
+
 buildscript {
     ext.kotlin_version = "1.6.0"
     repositories {
@@ -22,4 +26,12 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "zuper1998_SzamBiztHF_APP"
+        property "sonar.organization", "zuper1998"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
 }
