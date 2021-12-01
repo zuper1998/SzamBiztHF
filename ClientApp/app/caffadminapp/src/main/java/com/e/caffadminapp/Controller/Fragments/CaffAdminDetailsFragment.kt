@@ -173,12 +173,9 @@ class CaffAdminDetailsFragment : Fragment() {
 
         call.enqueue(object: Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                println("norip")
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
-                println("rip")
-                println(t.stackTraceToString())
             }
         })
     }
@@ -189,14 +186,12 @@ class CaffAdminDetailsFragment : Fragment() {
         call.enqueue(object : Callback<List<GetCommentResponse>> {
             override fun onResponse(call: Call<List<GetCommentResponse>>, message: Response<List<GetCommentResponse>>) {
                 if (message.code() == 200) {
-                    println("yup")
                     adapter.updateData(message.body()!! as ArrayList<GetCommentResponse>)
                     adapter.notifyDataSetChanged()
                 }
             }
 
             override fun onFailure(call: Call<List<GetCommentResponse>>, t: Throwable) {
-                println("nop")
                 Toast.makeText(binding.root.context, t.message, Toast.LENGTH_SHORT).show()
             }
         })
@@ -211,7 +206,6 @@ class CaffAdminDetailsFragment : Fragment() {
 
         call.enqueue(object: Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                println("norip")
                 for(i in 0 until AdminData.getCaffCache().size){
                     if(AdminData.getCaffCache()[i].id == selectedCaff.id){
                         AdminData.getCaffCache()[i].title = text
@@ -220,8 +214,6 @@ class CaffAdminDetailsFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
-                println("rip")
-                println(t.stackTraceToString())
             }
         })
     }
@@ -233,16 +225,12 @@ class CaffAdminDetailsFragment : Fragment() {
         call.enqueue(object: Callback<ResponseBody> {
             @RequiresApi(Build.VERSION_CODES.Q)
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                println("norip")
 
                 val name = response.headers().get("Content-Disposition")?.substringAfter('\"')?.removeSuffix("\"")
-                //println(response.body()?.string())
                 saveFileToExternalStorage(name!!, response.body()!!.byteStream())
             }
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                println("rip")
-                println(t.stackTraceToString())
             }
         })
     }

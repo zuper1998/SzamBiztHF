@@ -87,14 +87,9 @@ class CommentAdminAdapter(private var comments:ArrayList<GetCommentResponse>, va
         val call = retrofit.create(CommentService::class.java).deleteComment("Bearer " + AdminData.getToken(), id)
         call.enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, message: Response<Void>) {
-                if (message.code() == 200) {
-                    println("yup")
-
-                }
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
-                println("nop")
             }
         })
     }
@@ -106,14 +101,9 @@ class CommentAdminAdapter(private var comments:ArrayList<GetCommentResponse>, va
         val call = retrofit.create(CommentService::class.java).updateComment( request,"Bearer " + AdminData.getToken(), id)
         call.enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, message: Response<Void>) {
-                if (message.code() == 200) {
-                    println("yup")
-
-                }
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
-                println("nop")
             }
         })
     }

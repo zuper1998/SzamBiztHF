@@ -19,7 +19,6 @@ class CaffAdminAdapter(private var caffs:ArrayList<GetAllCaffResponse>): Recycle
     inner class ViewHolder(val binding: CaffRowBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(caff: GetAllCaffResponse) {
-            println("cc")
             binding.tvCaffTitle.text = caff.title
 
             if(caff.caff != null){

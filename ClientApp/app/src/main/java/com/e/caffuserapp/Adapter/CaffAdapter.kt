@@ -21,7 +21,6 @@ class CaffAdapter(private var caffs:ArrayList<GetAllCaffResponse>): RecyclerView
     inner class ViewHolder(val binding: CaffRowBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(caff: GetAllCaffResponse) {
-            println("cc")
             binding.tvCaffTitle.text = caff.title
 
             if(caff.caff != null){

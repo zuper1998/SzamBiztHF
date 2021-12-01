@@ -193,12 +193,9 @@ class UploadFragment : Fragment() {
 
         call.enqueue(object:Callback<Void>{
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                println("norip")
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
-                println("rip")
-                println(t.stackTraceToString())
             }
         })
     }

@@ -23,11 +23,6 @@ class CommentAdapter(private var comments:ArrayList<GetCommentResponse>): Recycl
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.bind(comments[position])
-        /*viewHolder.itemView.setOnLongClickListener {
-            AdminData.setEditedUser(users[position])
-            Navigation.findNavController(viewHolder.itemView).navigate(R.id.AccountDetailsFragment)
-            true
-        }*/
     }
 
 

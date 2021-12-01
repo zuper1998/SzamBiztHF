@@ -46,9 +46,7 @@ class HomeFragment : Fragment() {
         loadCache()
 
         binding.btnSearch.setOnClickListener {
-            println("keres")
             if(binding.svHomePage.text.toString().isEmpty()){
-                println("keresures")
                 adapter.updateData(caffs)
             }
             else{
@@ -61,7 +59,7 @@ class HomeFragment : Fragment() {
             adapter.updateData(ArrayList())
             adapter.notifyDataSetChanged()
             getAll(adapter)
-            binding.swipetorefreshHome.isRefreshing = false
+
         }
 
         return binding.root
@@ -87,16 +85,15 @@ class HomeFragment : Fragment() {
         call.enqueue(object : Callback<List<GetAllCaffResponse>> {
             override fun onResponse(call: Call<List<GetAllCaffResponse>>, message: Response<List<GetAllCaffResponse>>) {
                 if (message.code() == 200) {
-                    println("yup")
                     caffs = message.body()!! as ArrayList<GetAllCaffResponse>
                     saveCache()
                     adapter.updateData(message.body()!! as ArrayList<GetAllCaffResponse>)
+                    binding.swipetorefreshHome.isRefreshing = false
                     adapter.notifyDataSetChanged()
                 }
             }
 
             override fun onFailure(call: Call<List<GetAllCaffResponse>>, t: Throwable) {
-                println("nop")
                 Toast.makeText(binding.root.context, t.message, Toast.LENGTH_SHORT).show()
             }
         })
