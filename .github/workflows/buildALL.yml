@@ -67,4 +67,5 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           cd ./ClientApp/
+          chmod +x ./gradlew
           ./gradlew build sonarqube --info
