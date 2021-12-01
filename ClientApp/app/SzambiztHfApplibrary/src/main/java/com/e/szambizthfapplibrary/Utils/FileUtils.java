@@ -16,7 +16,9 @@ import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 
 public class FileUtils {
 
@@ -36,7 +38,7 @@ public class FileUtils {
      * @param uri     The Uri to query.
      */
     @SuppressLint("NewApi")
-    public static String getPath(final Context context, final Uri uri) {
+    public static String getPath(final Context context, final Uri uri) throws IOException {
         // Check here to KITKAT or new version
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
         String selection = null;
@@ -50,7 +52,7 @@ public class FileUtils {
                 final String type = split[0];
 
                 String fullPath = getPathFromExtSD(split);
-                if (fullPath != "") {
+                if (fullPath.equals("")) {
                     return fullPath;
                 } else {
                     return null;
@@ -110,7 +112,6 @@ public class FileUtils {
                                 Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
 
                     } catch (NumberFormatException e) {
-                        e.printStackTrace();
                     }
                     if (contentUri != null) {
                         return getDataColumn(context, contentUri, null, null);
@@ -220,7 +221,7 @@ public class FileUtils {
         return fullPath;
     }
 
-    private static String getDriveFilePath(Uri uri, Context context) {
+    private static String getDriveFilePath(Uri uri, Context context) throws IOException {
         Uri returnUri = uri;
         ContentResolver contentResolver = context.getContentResolver();
         Cursor returnCursor = contentResolver.query(returnUri, null, null, null, null);
@@ -233,13 +234,10 @@ public class FileUtils {
         int sizeIndex = returnCursor.getColumnIndex(OpenableColumns.SIZE);
         returnCursor.moveToFirst();
         String name = (returnCursor.getString(nameIndex));
-        String size = (Long.toString(returnCursor.getLong(sizeIndex)));
         File file = new File(context.getCacheDir(), name);
-        try {
-            InputStream inputStream = context.getContentResolver().openInputStream(uri);
-            FileOutputStream outputStream = new FileOutputStream(file);
+        try (InputStream inputStream = context.getContentResolver().openInputStream(uri); FileOutputStream outputStream = new FileOutputStream(file)) {
             int read = 0;
-            int maxBufferSize = 1 * 1024 * 1024;
+            int maxBufferSize = 1024 * 1024;
             int bytesAvailable = inputStream.available();
 
             // int bufferSize = 1024;
@@ -250,17 +248,16 @@ public class FileUtils {
                 outputStream.write(buffers, 0, read);
             }
             Log.e("File Size", "Size " + file.length());
-            inputStream.close();
             outputStream.close();
             Log.e("File Path", "Path " + file.getPath());
             Log.e("File Size", "Size " + file.length());
         } catch (Exception e) {
-            Log.e(LOG_TAG, e.getMessage());
+            Log.e(LOG_TAG, Objects.requireNonNull(e.getMessage()));
         }
         return file.getPath();
     }
 
-    private static String getMediaFilePathForN(Uri uri, Context context) {
+    private static String getMediaFilePathForN(Uri uri, Context context) throws IOException {
         Uri returnUri = uri;
         Cursor returnCursor = context.getContentResolver().query(returnUri, null, null, null, null);
 
@@ -274,11 +271,9 @@ public class FileUtils {
         String name = (returnCursor.getString(nameIndex));
         String size = (Long.toString(returnCursor.getLong(sizeIndex)));
         File file = new File(context.getFilesDir(), name);
-        try {
-            InputStream inputStream = context.getContentResolver().openInputStream(uri);
-            FileOutputStream outputStream = new FileOutputStream(file);
+        try (InputStream inputStream = context.getContentResolver().openInputStream(uri); FileOutputStream outputStream = new FileOutputStream(file)) {
             int read = 0;
-            int maxBufferSize = 1 * 1024 * 1024;
+            int maxBufferSize = 1024 * 1024;
             int bytesAvailable = inputStream.available();
 
             //int bufferSize = 1024;
@@ -294,7 +289,9 @@ public class FileUtils {
             Log.e("File Path", "Path " + file.getPath());
             Log.e("File Size", "Size " + file.length());
         } catch (Exception e) {
-            Log.e(LOG_TAG, e.getMessage());
+            Log.e(LOG_TAG, Objects.requireNonNull(e.getMessage()));
+        } finally {
+            returnCursor.close();
         }
         return file.getPath();
     }
