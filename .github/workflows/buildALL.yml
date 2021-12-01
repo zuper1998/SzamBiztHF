@@ -39,7 +39,7 @@ jobs:
           cd ./backend/backend
           ./gradlew build sonarqube --info
   buildCPP:
-    name: Backend
+    name: Cpp
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -67,6 +67,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           cd ./backend/backend/jni-library
+          chmod +x ./gradlew
           ./gradlew build sonarqube --info
 
   buildApp:
