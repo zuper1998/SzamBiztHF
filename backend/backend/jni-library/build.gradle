@@ -1,5 +1,72 @@
 plugins {
 	id 'java'
+//	id 'cpp-library'
 	id 'dev.nokee.jni-library'
 	id 'dev.nokee.cpp-language'
+}
+
+//library {
+//	privateHeaders.from file('src/main/headers/Blocks.h')
+//	privateHeaders.from file('src/main/headers/CAFF.h')
+//	privateHeaders.from file('src/main/headers/CaffAnim.h')
+//	privateHeaders.from file('src/main/headers/CaffCredits.h')
+//	privateHeaders.from file('src/main/headers/CaffHeader.h')
+//	privateHeaders.from file('src/main/headers/CAFFparser.h')
+//	privateHeaders.from file('src/main/headers/CIFF.h')
+//	privateHeaders.from file('src/main/headers/CIFFparser.h')
+//	privateHeaders.from file('src/main/headers/com_narcano_jni_CaffParser.h')
+//	privateHeaders.from file('src/main/headers/RGBpixel.h')
+//	source.from file('src/main/cpp/Blocks.cpp')
+//	source.from file('src/main/cpp/CAFF.cpp')
+//	source.from file('src/main/cpp/CaffAnim.cpp')
+//	source.from file('src/main/cpp/CaffCredits.cpp')
+//	source.from file('src/main/cpp/CaffHeader.cpp')
+//	source.from file('src/main/cpp/CAFFparser.cpp')
+//	source.from file('src/main/cpp/CIFF.cpp')
+//	source.from file('src/main/cpp/CIFFparser.cpp')
+//	source.from file('src/main/cpp/com_narcano_jni_CaffParser.cpp')
+//	source.from file('src/main/cpp/RGBpixel.cpp')
+//}
+
+model {
+	components {
+		hello(NativeLibrarySpec) {
+			binaries.all {
+				if (targetPlatform.operatingSystem.linux) {
+					cCompiler.args '-I', "src/main/headers/"
+					cCompiler.args '-c', "src/main/cpp/"
+					cCompiler.args '-D_FILE_OFFSET_BITS=64'
+				} else if (targetPlatform.operatingSystem.windows) {
+					cCompiler.args "-Isrc/main/headers/"
+					cCompiler.args "-c src/main/cpp/"
+					linker.args "Shlwapi.lib", "Advapi32.lib"
+				}
+			}
+		}
+	}
+
+//	toolChains {
+//		gcc(Gcc) {
+//			eachPlatform {
+//				cppCompiler.withArguments { args ->
+//					args << '-std=c++17'
+//				}
+//				cppCompiler.withArguments { args ->
+//					args << '-I src/main/headers/'
+//				}
+//				cppCompiler.withArguments { args ->
+//					args << '-c src/main/cpp/'
+//				}
+//			}
+//		}
+//	}
+
+}
+
+sonarqube {
+	properties {
+		property "sonar.projectKey", "zuper1998_SzamBiztHF"
+		property "sonar.organization", "zuper1998"
+		property "sonar.host.url", "https://sonarcloud.io"
+	}
 }
