@@ -6,7 +6,7 @@ plugins {
 
 model {
 	components {
-		hello(NativeLibrarySpec) {
+		nativeCpp(NativeLibrarySpec) {
 			binaries.all {
 				if (targetPlatform.operatingSystem.linux) {
 					cCompiler.args '-I', "src/main/headers/"
