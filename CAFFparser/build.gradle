@@ -1,5 +1,6 @@
 plugins {
     id 'cpp-library'
+    id "org.sonarqube" version "3.3"
 }
 
 version = '1.2.1'
@@ -43,5 +44,13 @@ model {
 task renameArtifacts (type: Copy) {
     doLast {
         ant.move(file:'build/lib/main/debug/CAFFparser.dll', tofile:'build/lib/main/debug/libnative.dll')
+    }
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "zuper1998_SzamBiztHF"
+        property "sonar.organization", "zuper1998"
+        property "sonar.host.url", "https://sonarcloud.io"
     }
 }
