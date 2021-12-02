@@ -38,9 +38,9 @@ jobs:
         run: |
           cd ./backend/backend
           ./gradlew build sonarqube --info
-          cd ./jni-library
-          chmod +x ./gradlew
-          ./gradlew build sonarqube --info
+        # cd ./jni-library
+        # chmod +x ./gradlew
+        # ./gradlew build sonarqube --info
   buildApp:
     name: Application
     runs-on: ubuntu-latest
