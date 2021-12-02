@@ -71,5 +71,6 @@ sonarqube {
 		property "sonar.cfamily.cache.enabled", "false"
 		property "sonar.exclusions", "src/main/java/**"
 		property "sonar.exclusions", "src/test/java/**"
+		property "sonar.exclusions", "jni-library/src/main/java/**"
 	}
 }
