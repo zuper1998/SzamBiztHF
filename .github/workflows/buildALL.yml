@@ -62,7 +62,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           cd ./backend/backend
-          ./gradlew sonarqube --include-build $HOME/.sonar
+          ./gradlew sonarqube
   buildApp:
     name: Application
     runs-on: ubuntu-latest
