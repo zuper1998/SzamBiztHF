@@ -64,5 +64,6 @@ sonarqube {
 		property "sonar.cfamily.build-wrapper-output", "build_wrapper_output_directory"
 		property "sonar.java.binaries", "jni-library/src/main/java/com/narcano/jni"
 		property "sonar.sources", "jni-library/src/main/cpp/"
+		property "sonar.cfamily.cache.enabled", "false"
 	}
 }
