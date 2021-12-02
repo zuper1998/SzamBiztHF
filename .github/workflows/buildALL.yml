@@ -98,4 +98,5 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           cd ./CAFFparser/
+          chmod +x ./gradlew
           ./gradlew build sonarqube --info
