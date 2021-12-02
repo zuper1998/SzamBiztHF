@@ -69,7 +69,7 @@ jobs:
           cd ./ClientApp/
           chmod +x ./gradlew
           ./gradlew build sonarqube --info
-    buildApp:
+    buildCPP:
       name: CAFFParser
       runs-on: ubuntu-latest
       steps:
