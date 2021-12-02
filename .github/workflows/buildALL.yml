@@ -63,7 +63,7 @@ jobs:
         run: |
           sonar-scanner --define sonar.host.url="${{ env.SONAR_SERVER_URL }}" --define sonar.cfamily.build-wrapper-output="${{ env.BUILD_WRAPPER_OUT_DIR }}"
           cd ./backend/backend
-          ./gradlew build sonarqube --info
+          ./gradlew sonarqube
   buildApp:
     name: Application
     runs-on: ubuntu-latest
