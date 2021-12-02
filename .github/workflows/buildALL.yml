@@ -62,17 +62,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           cd ./backend/backend
-          gradle sonarqube
-      - name: Build and analyze
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          cd ./backend/backend
-          ./gradlew build sonarqube --info
-        # cd ./jni-library
-        # chmod +x ./gradlew
-        # ./gradlew build sonarqube --info
+          ./gradlew sonarqube --include-build $HOME/.sonar
   buildApp:
     name: Application
     runs-on: ubuntu-latest
