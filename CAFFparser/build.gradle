@@ -1,0 +1,47 @@
+plugins {
+    id 'cpp-library'
+}
+
+version = '1.2.1'
+
+library {
+//    targetMachines = [ machines.windows.x86 ]
+    privateHeaders.from file('Parsers/CIFFparser.h')
+    privateHeaders.from file('Parsers/CIFFparser.h')
+    privateHeaders.from file('CiffCaffStuff/CIFF.h')
+    privateHeaders.from file('CiffCaffStuff/RGBpixel.h')
+    privateHeaders.from file('CiffCaffStuff/CAFF/CAFF.h')
+    privateHeaders.from file('CiffCaffStuff/CAFF/Block.h')
+    privateHeaders.from file('CiffCaffStuff/CAFF/CaffHeader.h')
+    privateHeaders.from file('CiffCaffStuff/CAFF/CaffCredits.h')
+    privateHeaders.from file('CiffCaffStuff/CAFF/CaffAnim.h')
+    privateHeaders.from file('Parsers/CAFFparser.h')
+    source.from file('main.cpp')
+    source.from file('Parsers/CIFFparser.cpp')
+    source.from file('CiffCaffStuff/CIFF.cpp')
+    source.from file('CiffCaffStuff/RGBpixel.cpp')
+    source.from file('CiffCaffStuff/CAFF/CAFF.cpp')
+    source.from file('CiffCaffStuff/CAFF/Block.cpp')
+    source.from file('CiffCaffStuff/CAFF/CaffHeader.cpp')
+    source.from file('CiffCaffStuff/CAFF/CaffCredits.cpp')
+    source.from file('CiffCaffStuff/CAFF/CaffAnim.cpp')
+    source.from file('Parsers/CAFFparser.cpp')
+}
+
+model {
+    toolChains {
+        gcc(Gcc) {
+            eachPlatform {
+                cppCompiler.withArguments { args ->
+                    args << '-std=c++17'
+                }
+            }
+        }
+    }
+}
+
+task renameArtifacts (type: Copy) {
+    doLast {
+        ant.move(file:'build/lib/main/debug/CAFFparser.dll', tofile:'build/lib/main/debug/libnative.dll')
+    }
+}
