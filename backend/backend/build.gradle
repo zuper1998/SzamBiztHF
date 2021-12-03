@@ -67,7 +67,7 @@ sonarqube {
 //		property "sonar.java.binaries", "jni-library/build/classes"
 //		property "sonar.java.libraries", "build/libs"
 //		property "sonar.java.libraries", "jni-library/build/libs"
-//		property "sonar.sources", "jni-library/src/main/cpp/"
+		property "sonar.sources", "jni-library/src/main/cpp/"
 //		property "sonar.cfamily.cache.enabled", "false"
 //		property "sonar.exclusions", "src/main/java/**"
 //		property "sonar.exclusions", "src/test/java/**"
