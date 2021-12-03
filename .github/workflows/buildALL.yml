@@ -62,7 +62,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           cd ./backend/backend
-          gradle sonarqube --define sonar.cfamily.build-wrapper-output="${{ env.BUILD_WRAPPER_OUT_DIR }}"    
+          gradle sonarqube
   buildApp:
     name: Application
     runs-on: ubuntu-latest
