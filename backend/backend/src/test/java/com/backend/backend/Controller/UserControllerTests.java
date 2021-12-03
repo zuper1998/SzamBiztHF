@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 public class UserControllerTests {
@@ -32,15 +32,23 @@ public class UserControllerTests {
     @Autowired
     private DataAccessAuth dataAccessAuth;
 
+    @Autowired
+    private UserController userController;
+
     @Test
     public void contextLoads() {
-        assertThat(ur).isNotNull();
-        assertThat(roleRepository).isNotNull();
-        assertThat(logRepository).isNotNull();
-        assertThat(authenticationManager).isNotNull();
-        assertThat(userRepository).isNotNull();
-        assertThat(jwtUtils).isNotNull();
-        assertThat(encoder).isNotNull();
-        assertThat(dataAccessAuth).isNotNull();
+        assertNotNull(ur);
+        assertNotNull(roleRepository);
+        assertNotNull(logRepository);
+        assertNotNull(authenticationManager);
+        assertNotNull(userRepository);
+        assertNotNull(jwtUtils);
+        assertNotNull(encoder);
+        assertNotNull(dataAccessAuth);
+    }
+
+    @Test
+    public void controllerLoads() {
+        assertNotNull(userController);
     }
 }

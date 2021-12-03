@@ -26,5 +26,4 @@ class BackendApplicationTests {
         assertThat(userRepository).isNotNull();
         assertThat(encoder).isNotNull();
     }
-
 }

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 public class CommentControllerTests {
@@ -21,11 +21,19 @@ public class CommentControllerTests {
     @Autowired
     private LogRepository logRepository;
 
+    @Autowired
+    private CommentController commentController;
+
     @Test
     public void contextLoads() {
-        assertThat(commentRepository).isNotNull();
-        assertThat(caffRepository).isNotNull();
-        assertThat(userRepository).isNotNull();
-        assertThat(logRepository).isNotNull();
+        assertNotNull(commentRepository);
+        assertNotNull(caffRepository);
+        assertNotNull(userRepository);
+        assertNotNull(logRepository);
+    }
+
+    @Test
+    public void controllerLoads() {
+        assertNotNull(commentController);
     }
 }
