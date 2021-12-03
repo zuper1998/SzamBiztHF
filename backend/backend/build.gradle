@@ -44,7 +44,7 @@ dependencies {
 	runtimeOnly("mysql:mysql-connector-java")
 	//implementation files('libs/ojdbc7.jar')
 	runtimeOnly("com.oracle.database.jdbc:ojdbc10:19.7.0.0")
-	//Native stuf
+	//Native stuff
 	implementation project(':jni-library')
 
 
@@ -67,10 +67,10 @@ sonarqube {
 //		property "sonar.java.binaries", "jni-library/build/classes"
 //		property "sonar.java.libraries", "build/libs"
 //		property "sonar.java.libraries", "jni-library/build/libs"
-		property "sonar.sources", "jni-library/src/main/cpp/"
-		property "sonar.cfamily.cache.enabled", "false"
-		property "sonar.exclusions", "src/main/java/**"
-		property "sonar.exclusions", "src/test/java/**"
-		property "sonar.exclusions", "jni-library/src/main/java/**"
+//		property "sonar.sources", "jni-library/src/main/cpp/"
+//		property "sonar.cfamily.cache.enabled", "false"
+//		property "sonar.exclusions", "src/main/java/**"
+//		property "sonar.exclusions", "src/test/java/**"
+//		property "sonar.exclusions", "jni-library/src/main/java/**"
 	}
 }
