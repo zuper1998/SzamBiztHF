@@ -54,8 +54,7 @@ jobs:
       - name: Run build-wrapper
         run: |
           cd ./backend/backend
-          mkdir build_wrapper_output_directory
-          build-wrapper-linux-x86-64 --out-dir ../../work/SzamBiztHF/SzamBiztHF/backend/backend/build_wrapper_output_directory gradle clean build --no-daemon
+          build-wrapper-linux-x86-64 --out-dir build_wrapper_output_directory gradle clean build --no-daemon
       - name: Build & analysis
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
