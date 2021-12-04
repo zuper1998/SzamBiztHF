@@ -11,10 +11,10 @@ group = 'com.backend'
 version = '0.0.1-SNAPSHOT'
 //sourceCompatibility = '11' TODO: Ezt kivettem nem tudom mennyire oof de nelkule nem megy semmi
 
-
 repositories {
 	mavenCentral()
 }
+
 application {
 	if (GradleVersion.current() >= GradleVersion.version('6.7')) {
 		mainClass = 'com.backend.backend.BackendApplication'
@@ -28,7 +28,11 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.springframework.boot:spring-boot-starter-security")
+
+	implementation('junit:junit:4.13.1')
+
 	implementation("org.codehaus.sonar-plugins.cxx:sonar-cxx-plugin:0.9")
+
 	compileOnly("io.jsonwebtoken:jjwt-api:0.11.0")
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.0")
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.0")
@@ -40,23 +44,20 @@ dependencies {
 	runtimeOnly("com.h2database:h2")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.security:spring-security-test")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 
 	runtimeOnly("mysql:mysql-connector-java")
-	//implementation files('libs/ojdbc7.jar')
 	runtimeOnly("com.oracle.database.jdbc:ojdbc10:19.7.0.0")
 	//Native stuff
 	implementation project(':jni-library')
-
-
 }
-
-
 
 test {
 	useJUnitPlatform()
 	systemProperty "java.library.path", file("${buildDir}/libs/com_narcano_jni_CaffParser/shared").absolutePath
 }
+
 sonarqube {
 	properties {
 		property "sonar.projectKey", "zuper1998_SzamBiztHF"
