@@ -113,7 +113,7 @@ public class UserControllerTests {
 
     @WithMockUser(roles = { "USER" })
     @Test
-    public void getAllUserrole() {
+    public void getAllUserRole() {
         Assertions.assertThrows(AccessDeniedException.class, () -> userController.getAll());
     }
 }
