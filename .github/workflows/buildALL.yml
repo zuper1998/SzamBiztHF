@@ -69,7 +69,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           cd ./backend/backend
-          sonar-scanner -Dsonar.host.url="${{ env.SONAR_SERVER_URL }}" -Dsonar.cfamily.build-wrapper-output="jni-library/build_wrapper_output_directory" -Dsonar.projectKey="zuper1998_SzamBiztHF" -Dsonar.organization="zuper1998" -Dsonar.sources="src/main, jni-library/src/main" -Dsonar.tests="src/test" -Dsonar.java.binaries="build/classes, jni-library/build/classes" -Dsonar.java.test.binaries="target/classes"
+          sonar-scanner -Dsonar.host.url="${{ env.SONAR_SERVER_URL }}" -Dsonar.cfamily.build-wrapper-output="jni-library/build_wrapper_output_directory" -Dsonar.projectKey="zuper1998_SzamBiztHF" -Dsonar.organization="zuper1998" -Dsonar.sources="src/main, jni-library/src/main" -Dsonar.tests="src/test" -Dsonar.java.binaries="." -Dsonar.java.test.binaries="."
   buildApp:
     name: Application
     runs-on: ubuntu-latest
