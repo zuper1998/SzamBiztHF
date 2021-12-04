@@ -98,7 +98,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           cd ./backend/backend/jni-library
-          sonar-scanner -Dsonar.host.url="${{ env.SONAR_SERVER_URL }}" -Dsonar.cfamily.build-wrapper-output="build_wrapper_output_directory" -Dsonar.projectKey="zuper1998_SzamBiztHF_JNI" -Dsonar.organization="zuper1998" -Dsonar.projectName="Backend JNI layer" -Dsonar.exclusions="src/main/java/com/narcano/jni/**"
+          sonar-scanner -Dsonar.host.url="${{ env.SONAR_SERVER_URL }}" -Dsonar.cfamily.build-wrapper-output="build_wrapper_output_directory" -Dsonar.projectKey="zuper1998_SzamBiztHF_CPP" -Dsonar.organization="zuper1998" -Dsonar.projectName="Backend JNI layer" -Dsonar.exclusions="src/main/java/com/narcano/jni/**"
   buildApp:
     name: Application
     runs-on: ubuntu-latest
