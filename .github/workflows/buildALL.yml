@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - IntegrationTests
   pull_request:
     types: [opened, synchronize, reopened]
   schedule:                # This trigger is here only to make sure
