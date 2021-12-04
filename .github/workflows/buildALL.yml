@@ -11,11 +11,6 @@ jobs:
   buildBackend:
     name: Backend
     runs-on: ubuntu-latest
-    env:
-      SONAR_SCANNER_VERSION: 4.6.1.2450 # Find the latest version in the "Linux" link on this page:
-                                        # https://sonarcloud.io/documentation/analysis/scan/sonarscanner/
-      SONAR_SERVER_URL: "https://sonarcloud.io"
-      BUILD_WRAPPER_OUT_DIR: backend/backend/build_wrapper_output_directory # Directory where build-wrapper output will be placed
     steps:
       - uses: actions/checkout@v2
         with:
@@ -50,7 +45,7 @@ jobs:
       SONAR_SCANNER_VERSION: 4.6.1.2450 # Find the latest version in the "Linux" link on this page:
                                         # https://sonarcloud.io/documentation/analysis/scan/sonarscanner/
       SONAR_SERVER_URL: "https://sonarcloud.io"
-      BUILD_WRAPPER_OUT_DIR: backend/backend/build_wrapper_output_directory # Directory where build-wrapper output will be placed
+      BUILD_WRAPPER_OUT_DIR: backend/backend/jni-library/build_wrapper_output_directory # Directory where build-wrapper output will be placed
     steps:
       - uses: actions/checkout@v2
         with:
@@ -68,7 +63,7 @@ jobs:
       - name: Cache Gradle packages
         uses: actions/cache@v1
         with:
-          path: ~/.backend/backend/gradle/caches
+          path: ~/.backend/backend/jni-library/gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
       - name: Download and set up sonar-scanner
@@ -90,10 +85,10 @@ jobs:
       - name: Run build-wrapper
         run: |
           cd ./backend/backend
-          build-wrapper-linux-x86-64 --out-dir build_wrapper_output_directory gradle clean build --no-daemon
+          build-wrapper-linux-x86-64 --out-dir jni-library/build_wrapper_output_directory gradle clean build --no-daemon
       - name: Verify build wrapper output
         run: |
-          cd ./backend/backend
+          cd ./backend/backend/jni-library
           ls -lh build_wrapper_output_directory
           cat build_wrapper_output_directory/build-wrapper-dump.json
           cat build_wrapper_output_directory/build-wrapper.log
@@ -103,7 +98,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           cd ./backend/backend
-          sonar-scanner -Dsonar.host.url="${{ env.SONAR_SERVER_URL }}" -Dsonar.cfamily.build-wrapper-output="build_wrapper_output_directory" -Dsonar.projectKey="zuper1998_SzamBiztHF" -Dsonar.organization="zuper1998" -Dsonar.exclusions="src/**,jni-library/src/main/java/com/narcano/jni/**"
+          sonar-scanner -Dsonar.host.url="${{ env.SONAR_SERVER_URL }}" -Dsonar.cfamily.build-wrapper-output="jni-library/build_wrapper_output_directory" -Dsonar.projectKey="zuper1998_SzamBiztHF" -Dsonar.organization="zuper1998" -Dsonar.exclusions="src/**,jni-library/src/main/java/com/narcano/jni/**"
   buildApp:
     name: Application
     runs-on: ubuntu-latest
