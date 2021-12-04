@@ -67,7 +67,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          sonar-scanner
+          cd ./backend/backend
+          sonar-scanner -Dsonar.host.url="${{ env.SONAR_SERVER_URL }}" -Dsonar.cfamily.build-wrapper-output="build_wrapper_output_directory"
       - name: Build & analysis
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
