@@ -4,11 +4,10 @@ import com.backend.backend.Repository.CaffRepository;
 import com.backend.backend.Repository.CommentRepository;
 import com.backend.backend.Repository.LogRepository;
 import com.backend.backend.Repository.UserRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 public class CommentControllerTests {
@@ -26,14 +25,14 @@ public class CommentControllerTests {
 
     @Test
     public void contextLoads() {
-        assertNotNull(commentRepository);
-        assertNotNull(caffRepository);
-        assertNotNull(userRepository);
-        assertNotNull(logRepository);
+        Assertions.assertNotNull(commentRepository);
+        Assertions.assertNotNull(caffRepository);
+        Assertions.assertNotNull(userRepository);
+        Assertions.assertNotNull(logRepository);
     }
 
     @Test
     public void controllerLoads() {
-        assertNotNull(commentController);
+        Assertions.assertNotNull(commentController);
     }
 }

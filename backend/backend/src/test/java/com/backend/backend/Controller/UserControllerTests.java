@@ -5,13 +5,12 @@ import com.backend.backend.Repository.RoleRepository;
 import com.backend.backend.Repository.UserRepository;
 import com.backend.backend.Security.Auth.JwtUtils;
 import com.backend.backend.Security.DataAccess.DataAccessAuth;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 public class UserControllerTests {
@@ -37,18 +36,18 @@ public class UserControllerTests {
 
     @Test
     public void contextLoads() {
-        assertNotNull(ur);
-        assertNotNull(roleRepository);
-        assertNotNull(logRepository);
-        assertNotNull(authenticationManager);
-        assertNotNull(userRepository);
-        assertNotNull(jwtUtils);
-        assertNotNull(encoder);
-        assertNotNull(dataAccessAuth);
+        Assertions.assertNotNull(ur);
+        Assertions.assertNotNull(roleRepository);
+        Assertions.assertNotNull(logRepository);
+        Assertions.assertNotNull(authenticationManager);
+        Assertions.assertNotNull(userRepository);
+        Assertions.assertNotNull(jwtUtils);
+        Assertions.assertNotNull(encoder);
+        Assertions.assertNotNull(dataAccessAuth);
     }
 
     @Test
     public void controllerLoads() {
-        assertNotNull(userController);
+        Assertions.assertNotNull(userController);
     }
 }
