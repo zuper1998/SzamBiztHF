@@ -54,7 +54,7 @@ jobs:
       - name: Run build-wrapper
         run: |
           cd ./backend/backend
-          build-wrapper-linux-x86-64 --out-dir build_wrapper_output_directory gradle clean build --no-daemon
+          $HOME/.sonar/build-wrapper-linux-x86-64 --out-dir build_wrapper_output_directory gradle clean build --no-daemon
       - name: Verify build wrapper output
         run: |
           ls -lh build_wrapper_output_directory
