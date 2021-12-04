@@ -77,6 +77,7 @@ public class CommentControllerTests {
         Assertions.assertThrows(AuthenticationCredentialsNotFoundException.class, () -> commentController.deleteComment(uuid));
     }
 
+    @WithMockUser(roles = { "USER" })
     @Test
     public void deleteCommentUserProfile() {
         UUID uuid = new UUID(0, 1);
