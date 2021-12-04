@@ -28,6 +28,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.codehaus.sonar-plugins.cxx:sonar-cxx-plugin:0.9")
 	compileOnly("io.jsonwebtoken:jjwt-api:0.11.0")
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.0")
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.0")
@@ -70,6 +71,7 @@ sonarqube {
 //		property "sonar.sources", "src/main/java/com/backend/backend,jni-library/src/main/java/com/narcano/jni,jni-library/src/main/cpp/"
 		property "sonar.sourceEncoding", "UTF-8"
 		property "sonar.inclusions", "*.cpp,*.h,src/main/java/**,jni-library/src/main/java/**,jni-library/src/main/cpp/**,jni-library/src/main/headers/**"
+		property "sonar.cxx.file.suffixes", ".h,.cpp"
 
 //		property "sonar.cfamily.cache.enabled", "false"
 //		property "sonar.exclusions", "src/main/java/**"

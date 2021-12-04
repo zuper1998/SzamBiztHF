@@ -62,6 +62,12 @@ jobs:
           ls -lh build_wrapper_output_directory
           cat build_wrapper_output_directory/build-wrapper-dump.json
           cat build_wrapper_output_directory/build-wrapper.log
+      - name: Run sonar-scanner
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          sonar-scanner
       - name: Build & analysis
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
