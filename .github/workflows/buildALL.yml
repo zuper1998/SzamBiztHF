@@ -51,14 +51,17 @@ jobs:
           curl -sSLo $HOME/.sonar/build-wrapper-linux-x86.zip ${{ env.BUILD_WRAPPER_DOWNLOAD_URL }}
           unzip -o $HOME/.sonar/build-wrapper-linux-x86.zip -d $HOME/.sonar/
           echo "$HOME/.sonar/build-wrapper-linux-x86" >> $GITHUB_PATH
-      - name: Run build-wrapper, build & analysis
+      - name: Run build-wrapper
+        run: |
+          cd ./backend/backend
+          mkdir build_wrapper_output_directory
+          build-wrapper-linux-x86-64 --out-dir ./build_wrapper_output_directory gradle clean build --no-daemon
+      - name: Build & analysis
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           cd ./backend/backend
-          mkdir build_wrapper_output_directory
-          build-wrapper-linux-x86-64 --out-dir build_wrapper_output_directory gradle clean build --no-daemon
           gradle sonarqube
   buildApp:
     name: Application
