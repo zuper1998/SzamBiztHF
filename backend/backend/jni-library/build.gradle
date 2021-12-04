@@ -21,12 +21,3 @@ model {
 		}
 	}
 }
-
-sonarqube {
-	properties {
-		property "sonar.projectKey", "zuper1998_SzamBiztHF_JNI"
-		property "sonar.organization", "zuper1998"
-		property "sonar.host.url", "https://sonarcloud.io"
-		property "sonar.cfamily.build-wrapper-output", "build_wrapper_output_directory"
-	}
-}
