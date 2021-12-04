@@ -11,36 +11,6 @@ jobs:
   buildBackend:
     name: Backend
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Set up JDK 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-      - name: Cache Gradle packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.backend/backend/gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-          restore-keys: ${{ runner.os }}-gradle
-      - name: Build & analysis
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          cd ./backend/backend
-          gradle sonarqube
-  buildBackendJNILayer:
-    name: Backend JNI Layer
-    runs-on: ubuntu-latest
     env:
       SONAR_SCANNER_VERSION: 4.6.1.2450 # Find the latest version in the "Linux" link on this page:
                                         # https://sonarcloud.io/documentation/analysis/scan/sonarscanner/
@@ -97,8 +67,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          cd ./backend/backend/jni-library
-          sonar-scanner -Dsonar.host.url="${{ env.SONAR_SERVER_URL }}" -Dsonar.cfamily.build-wrapper-output="build_wrapper_output_directory" -Dsonar.projectKey="zuper1998_SzamBiztHF_CPP" -Dsonar.organization="zuper1998" -Dsonar.projectName="Backend JNI layer" -Dsonar.exclusions="src/main/java/com/narcano/jni/**"
+          cd ./backend/backend
+          sonar-scanner -Dsonar.host.url="${{ env.SONAR_SERVER_URL }}" -Dsonar.cfamily.build-wrapper-output="jni-library/build_wrapper_output_directory" -Dsonar.projectKey="zuper1998_SzamBiztHF" -Dsonar.organization="zuper1998" -Dsonar.exclusions="src/main/java/com/narcano/jni/**" -Dsonar.sources="." -Dsonar.java.binaries="." 
   buildApp:
     name: Application
     runs-on: ubuntu-latest
