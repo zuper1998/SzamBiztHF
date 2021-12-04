@@ -53,7 +53,7 @@ jobs:
           echo "$HOME/.sonar/build-wrapper-linux-x86" >> $GITHUB_PATH
       - name: Run build-wrapper
         run: |
-          cd ./backend/backend
+          cd $HOME/.sonar
           build-wrapper-linux-x86-64 --out-dir build_wrapper_output_directory gradle clean build --no-daemon
       - name: Build & analysis
         env:
