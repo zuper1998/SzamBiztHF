@@ -28,7 +28,11 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.springframework.boot:spring-boot-starter-security")
-	implementation 'junit:junit:4.13.1'
+
+	implementation('junit:junit:4.13.1')
+
+	implementation("org.codehaus.sonar-plugins.cxx:sonar-cxx-plugin:0.9")
+
 	compileOnly("io.jsonwebtoken:jjwt-api:0.11.0")
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.0")
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.0")
@@ -45,7 +49,7 @@ dependencies {
 
 	runtimeOnly("mysql:mysql-connector-java")
 	runtimeOnly("com.oracle.database.jdbc:ojdbc10:19.7.0.0")
-	//Native stuf
+	//Native stuff
 	implementation project(':jni-library')
 }
 
@@ -59,16 +63,20 @@ sonarqube {
 		property "sonar.projectKey", "zuper1998_SzamBiztHF"
 		property "sonar.organization", "zuper1998"
 		property "sonar.host.url", "https://sonarcloud.io"
-		property "sonar.cfamily.build-wrapper-output", "build_wrapper_output_directory"
+//		property "sonar.cfamily.build-wrapper-output", "build_wrapper_output_directory"
 //		property "sonar.java.binaries", "jni-library/src/main/java/com/narcano/jni"
 //		property "sonar.java.binaries", "build/classes/"
 //		property "sonar.java.binaries", "jni-library/build/classes"
 //		property "sonar.java.libraries", "build/libs"
 //		property "sonar.java.libraries", "jni-library/build/libs"
-		property "sonar.sources", "jni-library/src/main/cpp/"
-		property "sonar.cfamily.cache.enabled", "false"
-		property "sonar.exclusions", "src/main/java/**"
-		property "sonar.exclusions", "src/test/java/**"
-		property "sonar.exclusions", "jni-library/src/main/java/**"
+//		property "sonar.sources", "src/main/java/com/backend/backend,jni-library/src/main/java/com/narcano/jni,jni-library/src/main/cpp/"
+//		property "sonar.sourceEncoding", "UTF-8"
+//		property "sonar.inclusions", "*.cpp,*.h,src/main/java/**,jni-library/src/main/java/**,jni-library/src/main/cpp/**,jni-library/src/main/headers/**"
+//		property "sonar.cxx.file.suffixes", ".h,.cpp"
+
+//		property "sonar.cfamily.cache.enabled", "false"
+//		property "sonar.exclusions", "src/main/java/**"
+//		property "sonar.exclusions", "src/test/java/**"
+//		property "sonar.exclusions", "jni-library/src/main/java/**"
 	}
 }
