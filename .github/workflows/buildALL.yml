@@ -59,7 +59,7 @@ jobs:
           $HOME/.sonar/build-wrapper-linux-x86/build-wrapper-linux-x86-64 --out-dir build_wrapper_output_directory gradle clean build --no-daemon
       - name: Verify build wrapper output
         run: |
-        cd ./backend/backend
+          cd ./backend/backend
           ls -lh build_wrapper_output_directory
           cat build_wrapper_output_directory/build-wrapper-dump.json
           cat build_wrapper_output_directory/build-wrapper.log
