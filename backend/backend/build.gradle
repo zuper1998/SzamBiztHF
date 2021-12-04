@@ -67,7 +67,7 @@ sonarqube {
 //		property "sonar.java.binaries", "jni-library/build/classes"
 //		property "sonar.java.libraries", "build/libs"
 //		property "sonar.java.libraries", "jni-library/build/libs"
-		property "sonar.sources", "src/main/java/com/backend/backend,jni-library/src/main/java/com/narcano/jni,jni-library/src/main/cpp/"
+//		property "sonar.sources", "src/main/java/com/backend/backend,jni-library/src/main/java/com/narcano/jni,jni-library/src/main/cpp/"
 		property "sonar.sourceEncoding", "UTF-8"
 		property "sonar.inclusions", "*.cpp,src/main/java/**,jni-library/src/main/java/**,jni-library/src/main/cpp/**"
 
