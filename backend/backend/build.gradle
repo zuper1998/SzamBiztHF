@@ -30,6 +30,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-security")
 
 	implementation('junit:junit:4.13.1')
+	testImplementation('junit:junit:4.13.1')
+	implementation('commons-collections:commons-collections:3.2.2')
 
 	implementation("org.codehaus.sonar-plugins.cxx:sonar-cxx-plugin:0.9")
 
@@ -42,6 +44,7 @@ dependencies {
 
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
+	implementation("com.h2database:h2")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
