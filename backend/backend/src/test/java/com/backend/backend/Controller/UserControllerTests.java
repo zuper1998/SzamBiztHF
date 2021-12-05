@@ -61,14 +61,12 @@ public class UserControllerTests {
 
     private SecurityContext securityContext;
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @BeforeClass
     private void initTests(){
         securityContext = SecurityContextHolder.createEmptyContext();
         SecurityContextHolder.setContext(securityContext);
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void contextLoads() {
         Assertions.assertNotNull(ur);
@@ -81,7 +79,6 @@ public class UserControllerTests {
         Assertions.assertNotNull(dataAccessAuth);
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     public User registrateUser(String username, String email, String password, Set<Role> roles) {
         User newUser = new User(username, email, encoder.encode(password), new ArrayList<>(), new ArrayList<>());
         newUser.setRoles(roles);
@@ -93,7 +90,6 @@ public class UserControllerTests {
         return newUser;
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     public void deleteUser(UUID id) {
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setUsername("admin");
@@ -102,7 +98,6 @@ public class UserControllerTests {
         userController.deleteUser(id);
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     public void setSecurityContext(String username, String password) {
         SecurityContextHolder.clearContext();
         securityContext = SecurityContextHolder.createEmptyContext();
@@ -112,13 +107,11 @@ public class UserControllerTests {
         securityContext.setAuthentication(new InteractiveAuthenticationSuccessEvent(auth, this.getClass()).getAuthentication());
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void controllerLoads() {
         Assertions.assertNotNull(userController);
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void loginAdminBadCredentials() {
         registrateUser("admin", "admin@admin.com", "admin", Set.of(new Role(RoleEnum.ROLE_USER), new Role(RoleEnum.ROLE_ADMIN)));
@@ -130,7 +123,6 @@ public class UserControllerTests {
         Assertions.assertThrows(BadCredentialsException.class, () -> userController.loginAdmin(loginRequest));
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void loginAdminGoodCredentials() {
         registrateUser("admin", "admin@admin.com", "admin", Set.of(new Role(RoleEnum.ROLE_USER), new Role(RoleEnum.ROLE_ADMIN)));
@@ -142,7 +134,6 @@ public class UserControllerTests {
         Assertions.assertDoesNotThrow(() -> userController.loginAdmin(loginRequest));
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void loginUserBadCredentials() {
         registrateUser("user", "user@user.com", "user", Set.of(new Role(RoleEnum.ROLE_USER)));
@@ -154,7 +145,6 @@ public class UserControllerTests {
         Assertions.assertThrows(BadCredentialsException.class, () -> userController.loginUser(loginRequest));
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void loginUserGoodCredentials() {
         registrateUser("user", "user@user.com", "user", Set.of(new Role(RoleEnum.ROLE_USER)));
@@ -166,7 +156,6 @@ public class UserControllerTests {
         Assertions.assertDoesNotThrow(() -> userController.loginUser(loginRequest));
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void registrationNewCredentials() {
         SignUpRequest signUpMessage = new SignUpRequest();
@@ -192,7 +181,6 @@ public class UserControllerTests {
         deleteUser(userDetails.getId());
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void registrationExistingCredentials() {
         registrateUser("existing", "existing@existing.com", "existing", Set.of(new Role(RoleEnum.ROLE_USER)));
@@ -216,7 +204,6 @@ public class UserControllerTests {
         Assertions.assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void userUpdateUserUnauthenticated() {
         UpdateUserRequest updateUserRequest = new UpdateUserRequest();
@@ -224,7 +211,6 @@ public class UserControllerTests {
         Assertions.assertThrows(AuthenticationCredentialsNotFoundException.class, () -> userController.userUpdateUser(updateUserRequest, uuid));
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void adminUpdateUserUnauthenticated() {
         UpdateUserRequest updateUserRequest = new UpdateUserRequest();
@@ -232,7 +218,6 @@ public class UserControllerTests {
         Assertions.assertThrows(AuthenticationCredentialsNotFoundException.class, () -> userController.adminUpdateUser(updateUserRequest, uuid));
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void userUpdateUserAuthenticated() {
         User newUser = registrateUser("user", "user@user.com", "user", Set.of(new Role(RoleEnum.ROLE_USER)));
@@ -246,7 +231,6 @@ public class UserControllerTests {
         deleteUser(userDetails.getId());
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void userUpdateOtherUser() {
         User user = registrateUser("user", "user@user.com", "user", Set.of(new Role(RoleEnum.ROLE_USER)));
@@ -261,7 +245,6 @@ public class UserControllerTests {
         deleteUser(userDetails.getId());
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void userUpdateUserNoPassword() {
         User newUser = registrateUser("user", "user@user.com", "user", Set.of(new Role(RoleEnum.ROLE_USER)));
@@ -275,7 +258,6 @@ public class UserControllerTests {
         deleteUser(userDetails.getId());
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void adminUpdateUserAuthenticated() {
         registrateUser("admin", "admin@admin.com", "admin", Set.of(new Role(RoleEnum.ROLE_USER), new Role(RoleEnum.ROLE_ADMIN)));
@@ -292,7 +274,6 @@ public class UserControllerTests {
         deleteUser(id);
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void adminUpdateUserEmailOnly() {
         registrateUser("admin", "admin@admin.com", "admin", Set.of(new Role(RoleEnum.ROLE_USER), new Role(RoleEnum.ROLE_ADMIN)));
@@ -309,7 +290,6 @@ public class UserControllerTests {
         deleteUser(id);
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void adminUpdateUserNotExisting() {
         registrateUser("admin", "admin@admin.com", "admin", Set.of(new Role(RoleEnum.ROLE_USER), new Role(RoleEnum.ROLE_ADMIN)));
@@ -327,7 +307,6 @@ public class UserControllerTests {
         deleteUser(id);
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void userUpdateUserNotExisting() {
         User newUser = registrateUser("user", "user@user.com", "user", Set.of(new Role(RoleEnum.ROLE_USER)));
@@ -341,7 +320,6 @@ public class UserControllerTests {
         Assertions.assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @WithMockUser(roles = { "USER" })
     @Test
     public void adminUpdateUserUserRole() {
@@ -350,14 +328,12 @@ public class UserControllerTests {
         Assertions.assertThrows(AccessDeniedException.class, () -> userController.adminUpdateUser(updateUserRequest, uuid));
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void adminAddUserUnauthenticated() {
         SignUpRequest signUpRequest = new SignUpRequest();
         Assertions.assertThrows(AuthenticationCredentialsNotFoundException.class, () -> userController.adminAddUser(signUpRequest));
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void adminAddUserExisting() {
         registrateUser("admin", "admin@admin.com", "admin", Set.of(new Role(RoleEnum.ROLE_USER), new Role(RoleEnum.ROLE_ADMIN)));
@@ -382,7 +358,6 @@ public class UserControllerTests {
         Assertions.assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void adminAddUserNoRoleProvided() {
         registrateUser("admin", "admin@admin.com", "admin", Set.of(new Role(RoleEnum.ROLE_USER), new Role(RoleEnum.ROLE_ADMIN)));
@@ -410,7 +385,6 @@ public class UserControllerTests {
         deleteUser(userDetails.getId());
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @WithMockUser(roles = { "USER" })
     @Test
     public void adminAddUserUserRole() {
@@ -418,14 +392,12 @@ public class UserControllerTests {
         Assertions.assertThrows(AccessDeniedException.class, () -> userController.adminAddUser(signUpRequest));
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void deleteUserUnauthenticated() {
         UUID uuid = new UUID(0, 1);
         Assertions.assertThrows(AuthenticationCredentialsNotFoundException.class, () -> userController.deleteUser(uuid));
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @WithMockUser(roles = { "USER" })
     @Test
     public void deleteUserUserRole() {
@@ -433,20 +405,17 @@ public class UserControllerTests {
         Assertions.assertThrows(AccessDeniedException.class, () -> userController.deleteUser(uuid));
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void getAllUnauthenticated() {
         Assertions.assertThrows(AuthenticationCredentialsNotFoundException.class, () -> userController.getAll());
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @WithMockUser(roles = { "USER" })
     @Test
     public void getAllRoleUser() {
         Assertions.assertThrows(AccessDeniedException.class, () -> userController.getAll());
     }
 
-    @SuppressWarnings("common-java:DuplicatedBlocks")
     @Test
     public void getAllRoleAdmin() {
         registrateUser("admin", "admin@admin.com", "admin", Set.of(new Role(RoleEnum.ROLE_USER), new Role(RoleEnum.ROLE_ADMIN)));
